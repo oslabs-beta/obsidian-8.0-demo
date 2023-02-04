@@ -14,12 +14,12 @@ function ObsidianWrapper(props) {
   async function query(query, options = {}) {
     // dev tool messages
     const startTime = Date.now();
-    chrome.runtime.sendMessage(chromeExtensionId, { query: query });
+    /*chrome.runtime.sendMessage(chromeExtensionId, { query: query });
     chrome.runtime.sendMessage(chromeExtensionId, {
       cache: window.localStorage.getItem('cache'),
-    });
+    });*/
     console.log(
-      "Here's the message content: ",
+      "Here's the cache content: ",
       window.localStorage.getItem('cache')
     );
     // set the options object default properties if not provided
@@ -54,9 +54,9 @@ function ObsidianWrapper(props) {
       if (resObj) {
         // returning cached response as a promise
         const cacheHitResponseTime = Date.now() - startTime;
-        chrome.runtime.sendMessage(chromeExtensionId, {
+        /*chrome.runtime.sendMessage(chromeExtensionId, {
           cacheHitResponseTime: cacheHitResponseTime,
-        });
+        });*/
         return new Promise((resolve, reject) => resolve(resObj));
       }
       // execute graphql fetch request if cache miss
@@ -88,9 +88,9 @@ function ObsidianWrapper(props) {
           else cache.write(query, deepResObj);
         }
         const cacheMissResponseTime = Date.now() - startTime;
-        chrome.runtime.sendMessage(chromeExtensionId, {
+        /*chrome.runtime.sendMessage(chromeExtensionId, {
           cacheMissResponseTime: cacheMissResponseTime,
-        });
+        });*/
         console.log(
           "Here's the response time on the front end: ",
           cacheMissResponseTime
