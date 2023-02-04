@@ -1,4 +1,4 @@
-import React from 'https://dev.jspm.io/react';
+import * as React from "https://esm.sh/react@18";
 import BrowserCache from '../src/Browser/CacheClassBrowser.js';
 import { insertTypenames } from '../src/Browser/insertTypenames.js';
 
