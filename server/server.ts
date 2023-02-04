@@ -23,10 +23,8 @@ const resolve = GraphQLHTTP({
 });
 
 const handleGraphQL = async (ctx) => {
-  //console.log(ctx);
   // cast Oak request into a normal Request
   const req = new Request(ctx.request.url.toString(), {
-    //body: ctx.request.originalRequest.getBody().body,
     body: JSON.stringify(await ctx.request.body().value),
     headers: ctx.request.headers,
     method: ctx.request.method,
@@ -47,7 +45,6 @@ const handleGraphQL = async (ctx) => {
 
 // Transpile jsx to js for React.
 await esbuild.initialize({
-  //wasmURL: "https://esm.sh/esbuild-wasm/esbuild.wasm",
   worker: false,
 });
 
