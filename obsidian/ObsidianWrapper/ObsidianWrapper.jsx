@@ -1,11 +1,12 @@
 import * as React from "https://esm.sh/react@18";
 import BrowserCache from '../src/Browser/CacheClassBrowser.js';
+import LFUCache from '../src/Browser/lfuBrowserCache.js';
 import { insertTypenames } from '../src/Browser/insertTypenames.js';
 
 const cacheContext = React.createContext();
 
 function ObsidianWrapper(props) {
-  const [cache, setCache] = React.useState(new BrowserCache());
+  const [cache, setCache] = React.useState(new LFUCache());
 
   // You have to put your Google Chrome Obsidian developer tool extension id to connect Obsidian Wrapper with dev tool
   const chromeExtensionId = 'apcpdmmbhhephobnmnllbklplpaoiemo';
