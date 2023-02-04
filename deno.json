@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "start": "deno run --allow-read --allow-net --allow-run --allow-write --no-check server/server.ts"
+  }
+}
