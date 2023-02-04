@@ -32,7 +32,7 @@ app.use((ctx) => {
         <title>Deno x React</title>
       </head>
       <body>
-        <div id="app" />
+        <div id="root" />
         <script>${indexJs}</script>
       </body>
     </html>
