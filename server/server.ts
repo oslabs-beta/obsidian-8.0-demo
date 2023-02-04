@@ -1,4 +1,6 @@
-import { Application, denoPlugin, esbuild } from "../deps/deps.server.ts";
+import { Application, denoPlugin, esbuild, dotenv as _dotenv } from "../deps/deps.server.ts";
+
+const PORT = Number(Deno.env.get("PORT"));
 
 // Transpile jsx to js for React.
 await esbuild.initialize({
@@ -15,4 +17,28 @@ const output = await esbuild.build({
   absWorkingDir: Deno.cwd(),
 });
 
-//const indexJs = new TextDecoder().decode(output.outputFiles[0].contents);
+// The raw transpiled output as a string.
+const indexJs = new TextDecoder().decode(output.outputFiles[0].contents);
+
+// Setup server.
+const app = new Application();
+
+// Return transpiled script as HTML string.
+app.use((ctx) => {
+  ctx.response.body = `
+    <!doctype html>
+    <html>
+      <head>
+        <title>Deno x React</title>
+      </head>
+      <body>
+        <div id="app" />
+        <script>${indexJs}</script>
+      </body>
+    </html>
+  `;
+});
+
+// Start server.
+console.log(`Listening on http://localhost:${PORT}`);
+await app.listen({ port: PORT });
