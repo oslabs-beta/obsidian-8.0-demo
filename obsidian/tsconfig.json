@@ -1,0 +1,18 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "allowJs": true,
+    "target": "ES2021",
+    "jsx": "react",
+    "noImplicitAny": false,
+    "module": "CommonJS",
+    "strict": true,
+    "lib": ["dom"]
+  },
+  "include": ["./**/*"],
+  "exclude": [
+    "./plugins/**/*",
+    "./typings/**/*",
+    "./built/**/*" // This is what fixed it!
+  ]
+}

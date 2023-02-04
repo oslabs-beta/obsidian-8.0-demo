@@ -12,6 +12,9 @@ import {
   useParams,
 } from "https://esm.sh/react-router-dom@6.3.0?deps=react@18";
 
+//import { ObsidianWrapper } from 'https://deno.land/x/obsidian/clientMod.ts';
+import { ObsidianWrapper } from '../obsidian/clientMod.ts';
+
 export { 
   React,
   ReactDOM,
@@ -21,5 +24,6 @@ export {
   Navigate,
   Route,
   Routes,
-  useParams
+  useParams,
+  ObsidianWrapper,
 };
