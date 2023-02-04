@@ -29,7 +29,7 @@ app.use((ctx) => {
     <!doctype html>
     <html>
       <head>
-        <title>Deno x React</title>
+        <title>Obsidian Demo</title>
       </head>
       <body>
         <div id="root" />

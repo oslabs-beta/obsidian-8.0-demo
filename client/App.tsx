@@ -1,7 +1,7 @@
 import { Navigate, React, Route, Routes } from "../deps/deps.client.ts";
 import Home from "./components/Home.tsx";
 
-export default function App(props) {
+const App = (props) => {
   return (
       <Routes>
         <Route exact path="/" element={<Home />} />
@@ -9,3 +9,5 @@ export default function App(props) {
       </Routes>
   );
 }
+
+export default App;
