@@ -12,6 +12,15 @@ const Home = () => {
   const [people, setPeople] = React.useState([]);
   // const [person, setPerson] = React.useState({name: '', mass: ''});
   const [search, setSearch] = React.useState('');
+  const [addForm, setAddForm] = React.useState(false)
+  const [addName, setAddName] = React.useState('');
+  const [mass, setMass] = React.useState('');
+  const [hair, setHair] = React.useState('');
+  const [skin, setSkin] = React.useState('')
+  const [eye, setEye] = React.useState('');
+  const [gender, setGender] = React.useState('');
+  const [height, setHeight] = React.useState(''); 
+
 
   const queryStr = `query {
       allPeople {
@@ -74,14 +83,23 @@ const Home = () => {
         homeworld_id
         height
   */
- const handleChange = (event: any) => {
-  setSearch(event.target.value);
+ const handleChange = (event: any, stateChange: any) => {
+  stateChange(event.target.value);
  }
 
 //  let personInfo;
 //  if (person.name !== '') {
 //   personInfo = <p>{ person.name }: weight - { person.mass }</p>
 // }
+
+let addCharacter;
+if (addForm) {
+  addCharacter = <div>
+    <form>
+      <input></input>
+    </form>
+  </div>
+}
 
   return (
     <div>
@@ -104,7 +122,7 @@ const Home = () => {
       </div>
 
       <div style={{"display": "flex", "justifyContent": "center", "padding": "10px", "alignItems": "space-between", "borderBottom": "1px solid black", "borderTop": "1px solid black"}}>
-        <input style={{"width": "8%", "padding": "5px", "marginLeft": "15px", "borderRadius": "10px"}} type="text" onChange={handleChange}></input>
+        <input style={{"width": "8%", "padding": "5px", "marginLeft": "15px", "borderRadius": "10px"}} type="text" onChange={(e) => handleChange(e, setSearch)}></input>
         <button style={{"width": "8%", "padding": "5px", "marginLeft": "15px", "borderRadius": "10px"}}
       onClick={() => {
         query(queryStrName)
@@ -133,6 +151,10 @@ const Home = () => {
       <div style={{"display": "flex", "justifyContent": "center", "padding": "10px"}}>
         <button style={{"padding": "5px", "width": "8%","borderRadius": "10px", "backgroundColor": "rgb(248,248,248)"}}
         onClick={() => {
+          setAddForm(true)
+        }}
+        /*
+        onClick={() => {
           query(queryStrAddCharacter)
           .then(resp => {
             console.log('mutation ', resp.data)
@@ -141,7 +163,11 @@ const Home = () => {
             // setPeople(...people, resp.data)
           })
         }}
+        */
         >Add Character</button>
+      </div>
+      <div>
+        {addCharacter}
       </div>
 
 
