@@ -5,6 +5,7 @@
 export default function normalizeResult(queryObj, resultObj, deleteFlag) {
   // Object to hold normalized obj
   const result = {};
+  // console.log('inside normalize result')
 
   // checks if there is a delete mutation
   if (deleteFlag) {
@@ -36,13 +37,24 @@ export default function normalizeResult(queryObj, resultObj, deleteFlag) {
 
   // creates a stringified version of query request and stores it in ROOT_QUERY key
   else if (queryObj.queries || queryObj.mutations) {
+    // console.log('doing some shit I donno ', queryObj)
+    // console.log('result Obj ', resultObj)
     if (queryObj.queries) {
+      // console.log('result before ', result)
+      // console.log('queryObj ', queryObj)
       result["ROOT_QUERY"] = createRootQuery(queryObj.queries, resultObj);
+      // console.log('result ', result)
+      // console.log('result after ', result)
     } else {
+      // console.log('mutation')
       result["ROOT_MUTATION"] = createRootQuery(queryObj.mutations, resultObj);
     }
+    // console.log('resultObj ', resultObj)
+    
     for (const curr in resultObj.data) {
+      // console.log('curr ',curr)
       if (!Array.isArray(resultObj.data[curr])) {
+        // console.log('not an array')
         const hashObj = createHash(resultObj.data[curr]);
         for (const hash in hashObj) {
           if (result[hash]) {
@@ -52,23 +64,38 @@ export default function normalizeResult(queryObj, resultObj, deleteFlag) {
           }
         }
       } else {
+        // console.log('is an array', resultObj.data[curr])
+        // console.log('result before ', result)
+        // return
+        // Object.assign(result['Person'], {name: 'Matthew Weisker'})
+        // console.log('result after ', result)
         for (let i = 0; i < resultObj.data[curr].length; i++) {
           // pass current obj to createHash function to create  obj of hashes
+          // console.log(resultObj.data[curr][i])
+          // console.log(resultObj.data[curr][i])
           const hashObj = createHash(resultObj.data[curr][i]);
+          // console.log('hashObj ', hashObj);
           // check if the hash object pair exists, if not create new key value pair
           // if it does exist merge the hash pair with the existing key value pair
           for (const hash in hashObj) {
+            // console.log('result while updating ', result)
+            // console.log('hash object while destructuring ', hashObj)
             if (result[hash]) {
               Object.assign(result[hash], hashObj[hash]);
+              // console.log('result of hash ', result[hash])
+              // console.log('hashObj of hash ', hashObj[hash])
+              // console.log('hash ', hash)
             } else {
               result[hash] = hashObj[hash];
             }
           }
         }
+        // console.log('test')
+        // console.log('result hash ', result)
       }
     }
   }
-  console.log(result);
+  // console.log(result);
   return result;
 }
 
@@ -77,6 +104,7 @@ function createRootQuery(queryObjArr, resultObj) {
   const output = {};
   queryObjArr.forEach((query) => {
     // if query has an alias declare it
+    // console.log('something new ', query)
     const alias = query.alias ?? null;
     const name = query.name;
     const args = query.arguments;
@@ -85,12 +113,15 @@ function createRootQuery(queryObjArr, resultObj) {
 
     // iterate thru the array of current query response
     // and store the hash of that response in an array
+    // console.log(result)
 
     if (Array.isArray(result)) {
       const arrOfHashes = [];
       result.forEach((obj) => {
+        // console.log(obj)
         arrOfHashes.push(labelId(obj));
       });
+
       //store the array of hashes associated with the queryHash
       output[queryHash] = arrOfHashes;
     } else {
@@ -102,7 +133,9 @@ function createRootQuery(queryObjArr, resultObj) {
 
 //returns a hash value pair of each response obj passed in
 function createHash(obj, output = {}) {
+  // console.log('before ', obj)
   const hash = labelId(obj);
+  // console.log('after ', hash)
 
   //if output doesnt have a key of hash create a new obj with that hash key
   if (!output[hash]) output[hash] = {};
@@ -137,6 +170,7 @@ function createHash(obj, output = {}) {
 }
 
 function labelId(obj) {
+  // console.log('here here I am over here ', obj)
   const id = obj.id || obj.ID || obj._id || obj._ID || obj.Id || obj._Id;
   return obj.__typename + "~" + id;
 }

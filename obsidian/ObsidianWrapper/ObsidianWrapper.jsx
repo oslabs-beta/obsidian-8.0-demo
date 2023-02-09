@@ -6,13 +6,16 @@ import { insertTypenames } from '../src/Browser/insertTypenames.js';
 const cacheContext = React.createContext();
 
 function ObsidianWrapper(props) {
-  const [cache, setCache] = React.useState(new LFUCache());
+  const [cache, setCache] = React.useState(new LFUCache(200));
+  // console.log('first ', cache)
 
   // You have to put your Google Chrome Obsidian developer tool extension id to connect Obsidian Wrapper with dev tool
   const chromeExtensionId = 'apcpdmmbhhephobnmnllbklplpaoiemo';
+  // initialice cache in local storage
   window.localStorage.setItem('cache', JSON.stringify(cache));
 
   async function query(query, options = {}) {
+    console.log('cache ', cache)
     // dev tool messages
     const startTime = Date.now();
     /*chrome.runtime.sendMessage(chromeExtensionId, { query: query });
@@ -51,10 +54,17 @@ function ObsidianWrapper(props) {
       // when the developer decides to only utilize whole query for cache
       if (wholeQuery) resObj = await cache.readWholeQuery(query);
       else resObj = await cache.read(query);
+      // console.log(resObj);
+      // console.log(query)
       // check if query is stored in cache
       if (resObj) {
+        // console.log('inside cache read using res obj ', resObj)
         // returning cached response as a promise
         const cacheHitResponseTime = Date.now() - startTime;
+        console.log(
+          "From cacheRead: Here's the response time on the front end: ",
+          cacheHitResponseTime
+        );
         /*chrome.runtime.sendMessage(chromeExtensionId, {
           cacheHitResponseTime: cacheHitResponseTime,
         });*/
@@ -70,7 +80,9 @@ function ObsidianWrapper(props) {
 
     // when cache miss or on intervals
     async function hunt(query) {
+      // console.log('query1 ', query)
       if (!wholeQuery) query = insertTypenames(query);
+      // console.log('query ', query)
       try {
         // send fetch request with query
         const resJSON = await fetch(endpoint, {
@@ -82,10 +94,11 @@ function ObsidianWrapper(props) {
           body: JSON.stringify({ query }),
         });
         const resObj = await resJSON.json();
+        // console.log('resObj ', resObj)
         const deepResObj = { ...resObj };
         // update result in cache if cacheWrite is set to true
         if (cacheWrite) {
-          if (wholeQuery) cache.writeWholeQuery(query, deepResObj);
+          if (wholeQuery) console.log('test') //cache.writeWholeQuery(query, deepResObj);
           else cache.write(query, deepResObj);
         }
         const cacheMissResponseTime = Date.now() - startTime;
@@ -93,7 +106,7 @@ function ObsidianWrapper(props) {
           cacheMissResponseTime: cacheMissResponseTime,
         });*/
         console.log(
-          "Here's the response time on the front end: ",
+          "After the hunt: Here's the response time on the front end: ",
           cacheMissResponseTime
         );
         return resObj;
@@ -121,10 +134,10 @@ function ObsidianWrapper(props) {
       cacheWrite = true,
       toDelete = false,
       update = null,
-      writeThrough = false,
+      writeThrough = true, // not true
     } = options;
     try {
-      if (writeThrough) {
+      if (!writeThrough) {
         // if it's a deletion, then delete from cache and return the object
         if (toDelete) {
           const responseObj = await cache.writeThrough(
@@ -153,7 +166,7 @@ function ObsidianWrapper(props) {
           }
           // always write/over-write to cache (add/update)
           // GQL call to make changes and synchronize database
-          console.log('WriteThrough - true ', responseObj);
+          console.log('WriteThrough - false ', responseObj);
           const addOrUpdateMutationResponseTime = Date.now() - startTime;
           chrome.runtime.sendMessage(chromeExtensionId, {
             addOrUpdateMutationResponseTime: addOrUpdateMutationResponseTime,
@@ -184,7 +197,7 @@ function ObsidianWrapper(props) {
         }
         // third behaviour just for normal update (no-delete, no update function)
         cache.write(mutation, responseObj);
-        console.log('WriteThrough - false ', responseObj);
+        console.log('WriteThrough - true ', responseObj);
         return responseObj;
       }
     } catch (e) {

@@ -15,7 +15,7 @@ const connect = async () => {
 const allPeople = async () => {
   const connection = await connect();
   const result = await connection.queryObject`
-          SELECT name, mass FROM people
+          SELECT _id, name, mass, hair_color, skin_color, eye_color, birth_year, gender, species_id, homeworld_id, height FROM people
         `;
   return result.rows;
 };
@@ -23,7 +23,7 @@ const allPeople = async () => {
 const onePerson = async (args: any) => {
   const connection = await connect();
   const result = await connection.queryObject`
-          SELECT name, mass FROM people WHERE name = ${args.name}
+          SELECT _id, name, mass, hair_color, skin_color, eye_color, gender, height FROM people WHERE name = ${args.name} OR mass = ${args.mass} 
         `;
   return result.rows[0];
 };
@@ -31,7 +31,7 @@ const onePerson = async (args: any) => {
 const addPerson = async (args: any) => {
   const connection = await connect();
   const result = await connection.queryObject`
-            INSERT INTO people(name) VALUES(${args.name}) RETURNING name
+            INSERT INTO people(name) VALUES(${args.name}) RETURNING name, _id
         `;
   return result.rows[0];
 };

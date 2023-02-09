@@ -3,10 +3,11 @@ import { gql } from '../../deps/deps.server.ts';
 export const typeDefs = gql`
   type Query {
     allPeople: [Person]
-    onePerson(name: String): Person
+    onePerson(name: String, mass: String): Person
   }
 
   type Person {
+    _id: Int!
     name: String!
     mass: String
     hair_color: String

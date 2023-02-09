@@ -22,7 +22,7 @@ const resolve = GraphQLHTTP({
   context: (request) => ({ request }),
 });
 
-const handleGraphQL = async (ctx) => {
+const handleGraphQL = async (ctx: any) => {
   // cast Oak request into a normal Request
   const req = new Request(ctx.request.url.toString(), {
     body: JSON.stringify(await ctx.request.body().value),

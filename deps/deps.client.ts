@@ -13,7 +13,7 @@ import {
 } from "https://esm.sh/react-router-dom@6.3.0?deps=react@18";
 
 //import { ObsidianWrapper, useObsidian, BrowserCache } from 'https://deno.land/x/obsidian/clientMod.ts';
-import { ObsidianWrapper, useObsidian, BrowserCache } from '../obsidian/clientMod.ts';
+import { ObsidianWrapper, useObsidian, BrowserCache, LFUCache } from '../obsidian/clientMod.ts';
 
 export { 
   React,
@@ -28,4 +28,5 @@ export {
   ObsidianWrapper,
   useObsidian,
   BrowserCache,
+  LFUCache
 };
