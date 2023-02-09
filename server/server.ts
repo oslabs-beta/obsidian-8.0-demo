@@ -1,6 +1,7 @@
 import { 
   Application,
   Router,
+  send,
   denoPlugin,
   esbuild, 
   dotenv as _dotenv,
@@ -65,6 +66,12 @@ const app = new Application();
 
 const router = new Router().all('/graphql', handleGraphQL)
 
+router.get('/:path+', async (ctx) => {
+  await send(ctx, ctx.request.url.pathname, {
+    root: Deno.cwd() + '/client/stylesheets',
+  });
+});
+
 app.use(router.routes(), router.allowedMethods());
 
 // Return transpiled script as HTML string.
@@ -74,6 +81,7 @@ app.use((ctx) => {
     <html>
       <head>
         <title>Obsidian Demo</title>
+        <link rel="stylesheet" href="styles.css">
       </head>
       <body>
         <div id="root" />

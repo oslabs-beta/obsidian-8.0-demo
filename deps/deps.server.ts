@@ -1,5 +1,5 @@
 // oak
-import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+import { Application, Router, send } from "https://deno.land/x/oak/mod.ts";
 
 // esbuild
 import * as esbuild from "https://deno.land/x/esbuild@v0.15.10/mod.js";
@@ -18,6 +18,7 @@ import { gql } from "https://deno.land/x/graphql_tag@0.0.1/mod.ts";
 export { 
   Application,
   Router,
+  send,
   esbuild,
   denoPlugin,
   dotenv,
