@@ -8,18 +8,24 @@ export PATH="/Users/mattweisker/.deno/bin:$PATH"
 */
 
 const Home = () => {
-  const { query, cache, setCache } = useObsidian();
+  const { query, cache, setCache, mutate } = useObsidian();
   const [people, setPeople] = React.useState([]);
   // const [person, setPerson] = React.useState({name: '', mass: ''});
   const [search, setSearch] = React.useState('');
+  // const [addForm, setAddForm] = React.useState(false)
   const [addForm, setAddForm] = React.useState(false)
-  const [addName, setAddName] = React.useState('');
-  const [mass, setMass] = React.useState('');
-  const [hair, setHair] = React.useState('');
-  const [skin, setSkin] = React.useState('')
-  const [eye, setEye] = React.useState('');
-  const [gender, setGender] = React.useState('');
-  const [height, setHeight] = React.useState(''); 
+
+
+  // const [addContent, setAddContent] = React.useState({name: '', mass: '', hair: '', skin: '', eye: '', gender: '', height: ''})
+  const [addContent, setAddContent] = React.useState({name: 'Mike Landswimmer', mass: '420', hair: 'Obsidian', skin: 'Obsidian', eye: 'Obsidian', gender: 'Flexible', height: 10})
+
+  // const [addName, setAddName] = React.useState('');
+  // const [mass, setMass] = React.useState('');
+  // const [hair, setHair] = React.useState('');
+  // const [skin, setSkin] = React.useState('')
+  // const [eye, setEye] = React.useState('');
+  // const [gender, setGender] = React.useState('');
+  // const [height, setHeight] = React.useState(''); 
 
 
   const queryStr = `query {
@@ -49,10 +55,18 @@ const Home = () => {
     }
   }`
 
+  // const [addContent, setAddContent] = React.useState({name: '', mass: '', hair: '', skin: '', eye: '', gender: '', height: ''})
+
   const queryStrAddCharacter = `mutation {
-    addPerson (name: "${search}") {
+    addPerson (name: "${addContent.name}",
+                mass: "${addContent.mass}",
+                hair_color: "${addContent.hair}",
+                skin_color: "${addContent.skin}",
+                eye_color: "${addContent.eye}",
+                gender: "${addContent.gender}",
+                height: ${addContent.height}
+              ) {
       _id
-      name
       name
       mass
       hair_color
@@ -86,20 +100,92 @@ const Home = () => {
  const handleChange = (event: any, stateChange: any) => {
   stateChange(event.target.value);
  }
+ const handleNewChar = (event: any, key: any) => {
+  event.preventDefault()
+  const newContent: object = {...addContent}
+  newContent[key] = event.target.value
+  if (key === 'height') newContent[key] = Number(event.target.value)
+  setAddContent(newContent)
+  // console.log(addContent)
+  // console.log(typeof addContent.height)
+ }
 
 //  let personInfo;
 //  if (person.name !== '') {
 //   personInfo = <p>{ person.name }: weight - { person.mass }</p>
 // }
+const addCharacterButton = () => {
+  if (!addForm) setAddForm(true);
+  else {
+      mutate(queryStrAddCharacter)
+      .then(resp => {
+        // console.log('mutation ', resp.data)
+        const data = [resp.data.addPerson]
+        setPeople(data)
+        // setPeople(...people, resp.data)
+      })
+    
+  }
+
+}
 
 let addCharacter;
 if (addForm) {
   addCharacter = <div>
-    <form>
-      <input></input>
+    <form className="add-character-form">
+      {/* <div className="add-character-column"> */}
+        <div className="add-character-input">
+          <label>Name - </label>
+          <input onChange={(e) => handleNewChar (e, "name")}></input>
+        </div>
+
+        <div className="add-character-input">
+          <label>Mass - </label>
+          <input onChange={(e) => handleNewChar (e, "mass")}></input>
+        </div>
+        
+        <div className="add-character-input">
+          <label>Hair-Color - </label>
+          <input onChange={(e) => handleNewChar (e, "hair")}></input>
+        </div>
+
+        <div className="add-character-input">
+          <label>Skin-Color - </label>
+          <input onChange={(e) => handleNewChar (e, "skin")}></input>
+        </div>
+
+        <div className="add-character-input">
+          <label>Eye-Color - </label>
+          <input onChange={(e) => handleNewChar (e, "eye")}></input>
+        </div>
+
+        <div className="add-character-input">
+          <label>Gender - </label>
+          <input onChange={(e) => handleNewChar (e, "gender")}></input>
+        </div>
+
+        <div className="add-character-input">
+          <label>Height - </label>
+          <input onChange={(e) => handleNewChar (e, "height")}></input>
+        </div>
+
+
+      {/* <button
+              onClick={() => {
+                mutate(queryStrAddCharacter)
+                .then(resp => {
+                  console.log('mutation ', resp.data)
+                  const data = [resp.data.addPerson]
+                  setPeople(data)
+                  // setPeople(...people, resp.data)
+                })
+              }}
+      >Add Your Character</button> */}
     </form>
   </div>
 }
+// const [addContent, setAddContent] = React.useState({name: '', mass: '', hair: '', skin: '', eye: '', gender: '', height: ''})
+
 
   return (
     <div>
@@ -112,9 +198,9 @@ if (addForm) {
         onClick={() => {
           query(queryStr)
           .then(resp => {
-            console.log('regular response ', resp)
+            // console.log('regular response ', resp)
             setPeople(resp.data.allPeople)
-            console.log(people.length)
+            // console.log(people.length)
           })
           // .then(resp => setCache(new LFUCache(cache.storage)))
         }}
@@ -127,7 +213,7 @@ if (addForm) {
       onClick={() => {
         query(queryStrName)
         .then(resp => {
-          console.log('front end console ', resp)
+          // console.log('front end console ', resp)
           let data = resp.data.onePerson;
           if (!Array.isArray(data)) {
             data = [data]
@@ -144,14 +230,15 @@ if (addForm) {
       }}
       >Search One Character</button>   
       </div>
-
       
-
+      <div className="add-form-div">
+        {addCharacter}
+      </div>
 
       <div style={{"display": "flex", "justifyContent": "center", "padding": "10px"}}>
         <button style={{"padding": "5px", "width": "8%","borderRadius": "10px", "backgroundColor": "rgb(248,248,248)"}}
         onClick={() => {
-          setAddForm(true)
+          addCharacterButton()
         }}
         /*
         onClick={() => {
@@ -166,9 +253,7 @@ if (addForm) {
         */
         >Add Character</button>
       </div>
-      <div>
-        {addCharacter}
-      </div>
+
 
 
       {/* <button */}
@@ -201,13 +286,13 @@ if (addForm) {
             // console.log(people)  
             <div style={{"display": "flex", "justifyContent": "space-between", "paddingLeft": "50px", "paddingRight": "50px", "borderBottom": "2px solid white", "backgroundColor": "AliceBlue"}}>
               {/* //  <div style={{"backgroundColor": "pink", "display": "flex", "justifyContent": "space-evenly", "height": "100%", "border": "1px solid black"}}> */}
-              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>name - {char.name}</p>
-              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>weight - {char.mass}</p>
-              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>hair-color - {char.hair_color}</p>
-              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>skin-color - {char.skin_color}</p>
-              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>eye-color - {char.eye_color}</p>
-              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>gender - {char.gender}</p>
-              <p style={{"display": "flex", "justifyContent": "start", "width": "10%"}}>height - {char.height}</p>
+              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>Name - {char.name}</p>
+              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>Weight - {char.mass}</p>
+              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>Hair-color - {char.hair_color}</p>
+              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>Skin-color - {char.skin_color}</p>
+              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>Eye-color - {char.eye_color}</p>
+              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>Gender - {char.gender}</p>
+              <p style={{"display": "flex", "justifyContent": "start", "width": "10%"}}>Height - {char.height}</p>
 
             </div>
 

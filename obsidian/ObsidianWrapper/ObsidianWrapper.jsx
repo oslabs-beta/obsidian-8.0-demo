@@ -15,17 +15,18 @@ function ObsidianWrapper(props) {
   window.localStorage.setItem('cache', JSON.stringify(cache));
 
   async function query(query, options = {}) {
-    console.log('cache ', cache)
+    // console.log('cache ', cache)
+    // console.log('query ', query)
     // dev tool messages
     const startTime = Date.now();
     /*chrome.runtime.sendMessage(chromeExtensionId, { query: query });
     chrome.runtime.sendMessage(chromeExtensionId, {
       cache: window.localStorage.getItem('cache'),
     });*/
-    console.log(
-      "Here's the cache content: ",
-      window.localStorage.getItem('cache')
-    );
+    // console.log(
+    //   "Here's the cache content: ",
+    //   window.localStorage.getItem('cache')
+    // );
     // set the options object default properties if not provided
     const {
       endpoint = '/graphql',
@@ -124,11 +125,12 @@ function ObsidianWrapper(props) {
   // breaking out writethrough logic vs. non-writethrough logic
   async function mutate(mutation, options = {}) {
     // dev tool messages
-    chrome.runtime.sendMessage(chromeExtensionId, {
-      mutation: mutation,
-    });
+    // chrome.runtime.sendMessage(chromeExtensionId, {
+    //   mutation: mutation,
+    // });
     const startTime = Date.now();
     mutation = insertTypenames(mutation);
+    console.log('typenames inserted ', mutation)
     const {
       endpoint = '/graphql',
       cacheWrite = true,
@@ -185,6 +187,7 @@ function ObsidianWrapper(props) {
           },
           body: JSON.stringify({ query: mutation }),
         }).then((resp) => resp.json());
+        console.log('response ', responseObj)
         if (!cacheWrite) return responseObj;
         // first behaviour when delete cache is set to true
         if (toDelete) {

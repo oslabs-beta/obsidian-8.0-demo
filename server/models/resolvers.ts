@@ -31,7 +31,7 @@ const onePerson = async (args: any) => {
 const addPerson = async (args: any) => {
   const connection = await connect();
   const result = await connection.queryObject`
-            INSERT INTO people(name) VALUES(${args.name}) RETURNING name, _id
+            INSERT INTO people(name, mass, hair_color, skin_color, eye_color, gender, height) VALUES (${args.name}, ${args.mass}, ${args.hair_color}, ${args.skin_color}, ${args.eye_color}, ${args.gender}, ${args.height}) RETURNING _id, name, mass, hair_color, skin_color, eye_color, gender, height
         `;
   return result.rows[0];
 };
