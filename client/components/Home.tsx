@@ -189,12 +189,12 @@ if (addForm) {
 
   return (
     <div>
-      <div style={{"display": "flex", "justifyContent": "center", "backgroundImage": "url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg)", "color": "orangeRed", "borderRadius": "10px", "fontSize": "4em", "padding": "10px"}}>
+      <div className="opening-crawl">
         <h1>Who has the high ground?</h1>
       </div>
       
-      <div style={{"display": "flex", "justifyContent": "center", "padding": "10px"}}>
-        <button style={{"width": "8%", "padding": "5px", "borderRadius": "10px"}}
+      <div className="get-all-characters">
+        <button
         onClick={() => {
           query(queryStr)
           .then(resp => {
@@ -207,9 +207,9 @@ if (addForm) {
         >Get All Characters</button>
       </div>
 
-      <div style={{"display": "flex", "justifyContent": "center", "padding": "10px", "alignItems": "space-between", "borderBottom": "1px solid black", "borderTop": "1px solid black"}}>
-        <input style={{"width": "8%", "padding": "5px", "marginLeft": "15px", "borderRadius": "10px"}} type="text" onChange={(e) => handleChange(e, setSearch)}></input>
-        <button style={{"width": "8%", "padding": "5px", "marginLeft": "15px", "borderRadius": "10px"}}
+      <div className="search-characters">
+        <input type="text" onChange={(e) => handleChange(e, setSearch)}></input>
+        <button 
       onClick={() => {
         query(queryStrName)
         .then(resp => {
@@ -235,8 +235,8 @@ if (addForm) {
         {addCharacter}
       </div>
 
-      <div style={{"display": "flex", "justifyContent": "center", "padding": "10px"}}>
-        <button style={{"padding": "5px", "width": "8%","borderRadius": "10px", "backgroundColor": "rgb(248,248,248)"}}
+      <div className="add-character">
+        <button
         onClick={() => {
           addCharacterButton()
         }}
@@ -272,7 +272,7 @@ if (addForm) {
       {/* <div style={{"backgroundColor": "aqua", "display": "flex", "width": "100%", "height": "100%", "flex": "1", "border": "1px solid black", "flexDirection": "column", "alignItems": "center", "padding": "20px"}}> */}
       <div>
       {/* <div>   */}
-      <div style={{"display": "flex", "justifyContent": "center", "padding": "10px"}}>
+      <div className="character-title">
         Characters
 
       </div>
@@ -284,15 +284,15 @@ if (addForm) {
         <div>
           {people && people.map((char) => (
             // console.log(people)  
-            <div style={{"display": "flex", "justifyContent": "space-between", "paddingLeft": "50px", "paddingRight": "50px", "borderBottom": "2px solid white", "backgroundColor": "AliceBlue"}}>
+            <div className="search-chart">
               {/* //  <div style={{"backgroundColor": "pink", "display": "flex", "justifyContent": "space-evenly", "height": "100%", "border": "1px solid black"}}> */}
-              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>Name - {char.name}</p>
-              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>Weight - {char.mass}</p>
-              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>Hair-color - {char.hair_color}</p>
-              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>Skin-color - {char.skin_color}</p>
-              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>Eye-color - {char.eye_color}</p>
-              <p style={{"display": "flex", "justifyContent": "start", "width": "15%"}}>Gender - {char.gender}</p>
-              <p style={{"display": "flex", "justifyContent": "start", "width": "10%"}}>Height - {char.height}</p>
+              <p className="ten">Name - {char.name}</p>
+              <p className="ten">Weight - {char.mass}</p>
+              <p className="ten">Hair-color - {char.hair_color}</p>
+              <p className="ten">Skin-color - {char.skin_color}</p>
+              <p className="ten">Eye-color - {char.eye_color}</p>
+              <p className="ten">Gender - {char.gender}</p>
+              <p className="last-row">Height - {char.height}</p>
 
             </div>
 
