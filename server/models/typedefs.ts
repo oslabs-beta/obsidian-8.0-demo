@@ -21,6 +21,6 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    addPerson(name: String): Person
+    addPerson(name: String, mass: String, hair_color: String, skin_color: String, eye_color: String, birth_year: String, gender: String, height: Int): Person
   }
 `;
