@@ -123,7 +123,7 @@ LFUCache.prototype.put = function (key, value) {
 
 LFUCache.prototype.read = async function (queryStr) {
   // console.log('root query ', queryStr)
-  console.log('cache.read')
+  // console.log('cache.read')
   if (typeof queryStr !== "string") throw TypeError("input should be a string");
   // destructure the query string into an object
   const queries = destructureQueries(queryStr).queries;
@@ -170,7 +170,9 @@ LFUCache.prototype.read = async function (queryStr) {
 LFUCache.prototype.write = async function (queryStr, respObj, deleteFlag) {
   // console.log('root query ', this.ROOT_QUERY)
   console.log('cache.write')
-  // console.log('queryStr ', queryStr)
+  console.log('queryStr ', queryStr)
+  console.log('respObj ', respObj)
+
   const queryObj = destructureQueries(queryStr);
   // console.log('queryObj post destructure ', queryObj)
   // console.log('respObj ', respObj)
@@ -228,7 +230,7 @@ LFUCache.prototype.populateAllHashes = function (
   allHashesFromQuery,
   fields
 ) {
-  console.log('populate all hashes')
+  // console.log('populate all hashes')
   if (!allHashesFromQuery.length) return [];
   const hyphenIdx = allHashesFromQuery[0].indexOf("~");
   const typeName = allHashesFromQuery[0].slice(0, hyphenIdx);
