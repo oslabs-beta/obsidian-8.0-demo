@@ -33,7 +33,7 @@ function ObsidianWrapper(props) {
       cacheRead = true,
       cacheWrite = true,
       pollInterval = null,
-      wholeQuery = false,
+      wholeQuery = true,
     } = options;
 
     // when pollInterval is not null the query will be sent to the server every inputted number of milliseconds
@@ -53,7 +53,7 @@ function ObsidianWrapper(props) {
     if (cacheRead) {
       let resObj;
       // when the developer decides to only utilize whole query for cache
-      if (wholeQuery) resObj = await cache.readWholeQuery(query);
+      if (!wholeQuery) resObj = await cache.readWholeQuery(query);
       else resObj = await cache.read(query);
       // console.log(resObj);
       // console.log(query)
@@ -82,7 +82,7 @@ function ObsidianWrapper(props) {
     // when cache miss or on intervals
     async function hunt(query) {
       // console.log('query1 ', query)
-      if (!wholeQuery) query = insertTypenames(query);
+      if (wholeQuery) query = insertTypenames(query);
       // console.log('query ', query)
       try {
         // send fetch request with query
@@ -95,11 +95,13 @@ function ObsidianWrapper(props) {
           body: JSON.stringify({ query }),
         });
         const resObj = await resJSON.json();
+        console.log('hunt');
+        console.log(resObj);
         // console.log('resObj ', resObj)
         const deepResObj = { ...resObj };
         // update result in cache if cacheWrite is set to true
         if (cacheWrite && resObj.data[Object.keys(resObj.data)[0]] !== null) {
-          if (wholeQuery) console.log('test') //cache.writeWholeQuery(query, deepResObj);
+          if (!wholeQuery) console.log('test');//cache.writeWholeQuery(query, deepResObj);
           else cache.write(query, deepResObj);
         }
         const cacheMissResponseTime = Date.now() - startTime;

@@ -2,6 +2,7 @@ import { reset } from "https://deno.land/std@0.152.0/fmt/colors";
 import { useEffect } from "https://esm.sh/v106/@types/react@18.0.27/X-ZC9yZWFjdEAxOC4yLjA/index";
 import { React, useObsidian, BrowserCache, LFUCache } from "../../deps/deps.client.ts";
 import InputField from "./InputField.tsx";
+import  CharacterCards  from "./CharacterCards.tsx"
 /*
 deno install -qAf --unstable https://deno.land/x/denon/denon.ts
 export PATH="/Users/mattweisker/.deno/bin:$PATH"
@@ -233,9 +234,24 @@ const addCharacter = (
 )
 
   return (
-    <div>
+    <div className="home-container">
       <div className="opening-crawl">
         <h1>Who has the high ground?</h1>
+      </div>
+      
+      <div className="get-all-characters">
+        <button
+        onClick={() => {
+          query(queryStr)
+          .then(resp => {
+            // console.log('regular response ', resp)
+            setPeople(resp.data.allPeople)
+           
+            // console.log(people.length)
+          })
+          // .then(resp => setCache(new LFUCache(cache.storage)))
+        }}
+        >Get All Characters</button>
       </div>
 
       <div className="mid-container">
@@ -289,20 +305,24 @@ const addCharacter = (
         }} */}
 
 {/* {"display": "flex", "width": "100%", "justifyContent": "space-around"} */}
-        <div>
+        <div className="character-container">
           {people && people.map((char) => (
+            <>
+            <CharacterCards char={char}/>
+            </>
+          
             // console.log(people)  
-            <div className="search-chart">
-              {/* //  <div style={{"backgroundColor": "pink", "display": "flex", "justifyContent": "space-evenly", "height": "100%", "border": "1px solid black"}}> */}
-              <p className="ten">Name - {char.name}</p>
-              <p className="ten">Weight - {char.mass}</p>
-              <p className="ten">Hair-color - {char.hair_color}</p>
-              <p className="ten">Skin-color - {char.skin_color}</p>
-              <p className="ten">Eye-color - {char.eye_color}</p>
-              <p className="ten">Gender - {char.gender}</p>
-              <p className="last-row">Height - {char.height}</p>
+            // <div className="search-chart">
+            //   {/* //  <div style={{"backgroundColor": "pink", "display": "flex", "justifyContent": "space-evenly", "height": "100%", "border": "1px solid black"}}> */}
+            //   <p className="ten">Name - {char.name}</p>
+            //   <p className="ten">Weight - {char.mass}</p>
+            //   <p className="ten">Hair-color - {char.hair_color}</p>
+            //   <p className="ten">Skin-color - {char.skin_color}</p>
+            //   <p className="ten">Eye-color - {char.eye_color}</p>
+            //   <p className="ten">Gender - {char.gender}</p>
+            //   <p className="last-row">Height - {char.height}</p>
 
-            </div>
+            // </div>
 
           ))}
         </div>
