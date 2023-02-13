@@ -98,7 +98,7 @@ function ObsidianWrapper(props) {
         // console.log('resObj ', resObj)
         const deepResObj = { ...resObj };
         // update result in cache if cacheWrite is set to true
-        if (cacheWrite) {
+        if (cacheWrite && resObj.data[Object.keys(resObj.data)[0]] !== null) {
           if (wholeQuery) console.log('test') //cache.writeWholeQuery(query, deepResObj);
           else cache.write(query, deepResObj);
         }
@@ -199,7 +199,7 @@ function ObsidianWrapper(props) {
           update(cache, responseObj);
         }
         // third behaviour just for normal update (no-delete, no update function)
-        cache.write(mutation, responseObj);
+        if(!responseObj.errors) cache.write(mutation, responseObj);
         console.log('WriteThrough - true ', responseObj);
         return responseObj;
       }
