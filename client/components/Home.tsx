@@ -1,5 +1,7 @@
 import { reset } from "https://deno.land/std@0.152.0/fmt/colors";
 import { React, useObsidian, BrowserCache, LFUCache } from "../../deps/deps.client.ts";
+import Bar from "./Bar.tsx";
+
 
 /*
 deno install -qAf --unstable https://deno.land/x/denon/denon.ts
@@ -19,6 +21,9 @@ const Home = () => {
   // const [addContent, setAddContent] = React.useState({name: '', mass: '', hair: '', skin: '', eye: '', gender: '', height: ''})
   const [addContent, setAddContent] = React.useState({name: 'Mike Landswimmer', mass: '420', hair: 'Obsidian', skin: 'Obsidian', eye: 'Obsidian', gender: 'Flexible', height: 10})
 
+
+  const [callData, setCallData] = React.useState({});
+  const [currentQuery, setCurrentQuery] = React.useState('')
   // const [addName, setAddName] = React.useState('');
   // const [mass, setMass] = React.useState('');
   // const [hair, setHair] = React.useState('');
@@ -192,6 +197,8 @@ if (addForm) {
       <div className="opening-crawl">
         <h1>Who has the high ground?</h1>
       </div>
+
+
       
       <div className="get-all-characters">
         <button
@@ -200,7 +207,17 @@ if (addForm) {
           .then(resp => {
             // console.log('regular response ', resp)
             setPeople(resp.data.allPeople)
+            const query = "Search All Characters"
+            setCurrentQuery(query)
+            const dataCopy = {...callData};
+            if (!dataCopy[query]) dataCopy[query] = [];
+            dataCopy[query].push(resp.time)
+            setCallData(dataCopy)
+            // console.log('cache ', cache)
+            // console.log('new response ', resp.time)
             // console.log(people.length)
+            console.log(callData);
+            console.log(currentQuery)
           })
           // .then(resp => setCache(new LFUCache(cache.storage)))
         }}
@@ -223,6 +240,13 @@ if (addForm) {
           // console.log('cache data ', cacheData)
           // setPerson({name: data.name, mass: data.mass})
           setPeople(data)
+
+          const query = `Search For ${search}`
+          setCurrentQuery(query)
+          const dataCopy = {...callData};
+          if (!dataCopy[query]) dataCopy[query] = [];
+          dataCopy[query].push(resp.time)
+          setCallData(dataCopy)
           // if (cacheData) setPerson({name: cacheData.name, mass: cacheData.mass})
           // console.log('person state ', person)
         })
@@ -276,12 +300,16 @@ if (addForm) {
         Characters
 
       </div>
+
+      <div>
+        { <Bar callData={callData} currentQuery={currentQuery} /> }
+      </div>
         {/* { for (let i: number = 0; i < people.length; i++) {
           <p>{people[i]</p>
         }} */}
 
 {/* {"display": "flex", "width": "100%", "justifyContent": "space-around"} */}
-        <div>
+        <div className="total-search-chart">
           {people && people.map((char) => (
             // console.log(people)  
             <div className="search-chart">
@@ -300,6 +328,9 @@ if (addForm) {
         </div>
 
       </div>
+
+
+
       
     </div>
   );
