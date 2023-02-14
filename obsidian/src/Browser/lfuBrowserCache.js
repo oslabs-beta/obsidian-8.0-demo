@@ -56,6 +56,7 @@ export default function LFUCache(capacity) {
   this.ROOT_MUTATION = {};
   this.nodeHash = new Map();
   this.freqHash = new Map();
+  this.callTime = 0
 }
 
 /**
