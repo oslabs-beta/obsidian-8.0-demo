@@ -62,6 +62,17 @@ function ObsidianWrapper(props) {
         // console.log('inside cache read using res obj ', resObj)
         // returning cached response as a promise
         const cacheHitResponseTime = Date.now() - startTime;
+
+        // Allow for access of the response time
+        // const cacheCopy = {...cache};
+        // cacheCopy.callTime = cacheHitResponseTime;
+        // setCache(cacheCopy);
+        // console.log('backend cache ', cache)
+        // console.log('res obj ', resObj)
+        resObj['time'] = cacheHitResponseTime
+        console.log('res obj after ', resObj)
+
+
         console.log(
           "From cacheRead: Here's the response time on the front end: ",
           cacheHitResponseTime
@@ -108,6 +119,7 @@ function ObsidianWrapper(props) {
         /*chrome.runtime.sendMessage(chromeExtensionId, {
           cacheMissResponseTime: cacheMissResponseTime,
         });*/
+        resObj['time'] = cacheMissResponseTime
         console.log(
           "After the hunt: Here's the response time on the front end: ",
           cacheMissResponseTime
@@ -200,8 +212,9 @@ function ObsidianWrapper(props) {
         if (update) {
           update(cache, responseObj);
         }
-        // third behaviour just for normal update (no-delete, no update function)
+
         if(!responseObj.errors) cache.write(mutation, responseObj);
+        // third behaviour just for normal update (no-delete, no update function)
         console.log('WriteThrough - true ', responseObj);
         return responseObj;
       }

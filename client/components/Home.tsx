@@ -1,6 +1,9 @@
 import { reset } from "https://deno.land/std@0.152.0/fmt/colors";
 import { useEffect } from "https://esm.sh/v106/@types/react@18.0.27/X-ZC9yZWFjdEAxOC4yLjA/index";
 import { React, useObsidian, BrowserCache, LFUCache } from "../../deps/deps.client.ts";
+import Bar from "./Bar.tsx";
+
+
 import InputField from "./InputField.tsx";
 import  CharacterCards  from "./CharacterCards.tsx"
 /*
@@ -23,6 +26,9 @@ const Home = () => {
   // const [addContent, setAddContent] = React.useState({name: '', mass: '', hair: '', skin: '', eye: '', gender: '', height: ''})
   const [addContent, setAddContent] = React.useState({name: 'Mike Landswimmer', mass: '420', hair: 'Obsidian', skin: 'Obsidian', eye: 'Obsidian', gender: 'Flexible', height: 10})
 
+
+  const [callData, setCallData] = React.useState({});
+  const [currentQuery, setCurrentQuery] = React.useState('')
   // const [addName, setAddName] = React.useState('');
   // const [mass, setMass] = React.useState('');
   // const [hair, setHair] = React.useState('');
@@ -138,6 +144,12 @@ const Home = () => {
           data = [data]
         }
         setPeople(data)
+        const query = `Search For ${search}`
+        setCurrentQuery(query)
+        const dataCopy = {...callData};
+        if (!dataCopy[query]) dataCopy[query] = [];
+        dataCopy[query].push(resp.time)
+        setCallData(dataCopy)
       })
     }
   }
@@ -166,6 +178,12 @@ const getAllCharacters = (
         query(queryStr)
         .then(resp => {
           setPeople(resp.data.allPeople)
+          const query = "Search All Characters"
+          setCurrentQuery(query)
+          const dataCopy = {...callData};
+          if (!dataCopy[query]) dataCopy[query] = [];
+          dataCopy[query].push(resp.time)
+          setCallData(dataCopy)
         })
       }}
       >Get All Characters</button>
@@ -238,22 +256,60 @@ const addCharacter = (
       <div className="opening-crawl">
         <h1>Who has the high ground?</h1>
       </div>
+
+
       
-      <div className="get-all-characters">
+      {/* <div className="get-all-characters">
         <button
         onClick={() => {
           query(queryStr)
           .then(resp => {
             // console.log('regular response ', resp)
             setPeople(resp.data.allPeople)
-           
+            const query = "Search All Characters"
+            setCurrentQuery(query)
+            const dataCopy = {...callData};
+            if (!dataCopy[query]) dataCopy[query] = [];
+            dataCopy[query].push(resp.time)
+            setCallData(dataCopy)
+            // console.log('cache ', cache)
+            // console.log('new response ', resp.time)
             // console.log(people.length)
+            console.log(callData);
+            console.log(currentQuery)
           })
           // .then(resp => setCache(new LFUCache(cache.storage)))
         }}
         >Get All Characters</button>
       </div>
 
+      <div className="search-characters">
+        <input type="text" onChange={(e) => handleChange(e, setSearch)}></input>
+        <button 
+      onClick={() => {
+        query(queryStrName)
+        .then(resp => {
+          // console.log('front end console ', resp)
+          let data = resp.data.onePerson;
+          if (!Array.isArray(data)) {
+            data = [data]
+          }
+          // const data = resp.data.onePerson
+          // const cacheData = resp.data.onePerson[0]
+          // console.log('cache data ', cacheData)
+          // setPerson({name: data.name, mass: data.mass})
+          setPeople(data)
+
+          const query = `Search For ${search}`
+          setCurrentQuery(query)
+          const dataCopy = {...callData};
+          if (!dataCopy[query]) dataCopy[query] = [];
+          dataCopy[query].push(resp.time)
+          setCallData(dataCopy)
+          // if (cacheData) setPerson({name: cacheData.name, mass: cacheData.mass})
+          // console.log('person state ', person)
+        }) */}
+      
       <div className="mid-container">
         <div className="button-container">
           <div className="get-all-characters">
@@ -294,40 +350,38 @@ const addCharacter = (
           getAllDisplay={getAllDisplay}/>
       </div>
 
+
+
       <div>
       {/* <div>   */}
       <div className="character-title">
         Characters
 
       </div>
+
+      <div>
+        { <Bar callData={callData} currentQuery={currentQuery} /> }
+      </div>
         {/* { for (let i: number = 0; i < people.length; i++) {
           <p>{people[i]</p>
         }} */}
 
 {/* {"display": "flex", "width": "100%", "justifyContent": "space-around"} */}
+
+
         <div className="character-container">
           {people && people.map((char) => (
             <>
             <CharacterCards char={char}/>
             </>
-          
-            // console.log(people)  
-            // <div className="search-chart">
-            //   {/* //  <div style={{"backgroundColor": "pink", "display": "flex", "justifyContent": "space-evenly", "height": "100%", "border": "1px solid black"}}> */}
-            //   <p className="ten">Name - {char.name}</p>
-            //   <p className="ten">Weight - {char.mass}</p>
-            //   <p className="ten">Hair-color - {char.hair_color}</p>
-            //   <p className="ten">Skin-color - {char.skin_color}</p>
-            //   <p className="ten">Eye-color - {char.eye_color}</p>
-            //   <p className="ten">Gender - {char.gender}</p>
-            //   <p className="last-row">Height - {char.height}</p>
-
-            // </div>
 
           ))}
         </div>
 
       </div>
+
+
+
       
       
     </div>
