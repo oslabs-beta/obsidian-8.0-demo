@@ -48,7 +48,6 @@ const Bar = (props: any) => {
 
     return (
         <div>
-            <h1>This is a graph</h1>
             {/* <button onClick={() => {
               setCurrentQuery('Search all characters')
               setShow(true)

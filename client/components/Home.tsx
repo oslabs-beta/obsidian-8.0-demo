@@ -96,17 +96,6 @@ const Home = () => {
   // }`
 
 
-  /*
-  mass
-        hair_color
-        skin_color
-        eye_color
-        birth_year
-        gender
-        species_id
-        homeworld_id
-        height
-  */
  const handleChange = (event: any, stateChange: any) => {
   stateChange(event.target.value);
  }
@@ -116,8 +105,6 @@ const Home = () => {
   newContent[key] = event.target.value
   if (key === 'height') newContent[key] = Number(event.target.value)
   setAddContent(newContent)
-  // console.log(addContent)
-  // console.log(typeof addContent.height)
  }
 
 
@@ -353,37 +340,24 @@ const addCharacter = (
 
 
       <div>
-      {/* <div>   */}
       <div className="character-title">
         Characters
-
-      </div>
-
-      <div>
-        { <Bar callData={callData} currentQuery={currentQuery} /> }
-      </div>
-        {/* { for (let i: number = 0; i < people.length; i++) {
-          <p>{people[i]</p>
-        }} */}
-
-{/* {"display": "flex", "width": "100%", "justifyContent": "space-around"} */}
-
-
+      
+      <div className="response-container">
         <div className="character-container">
-          {people && people.map((char) => (
-            <>
-            <CharacterCards char={char}/>
-            </>
+            {people && people.map((char) => (
+              <>
+              <CharacterCards char={char}/>
+              </>
+            ))}
 
-          ))}
         </div>
-
+        <div className="graph-container">
+            { <Bar callData={callData} currentQuery={currentQuery} /> }
+        </div>
       </div>
-
-
-
-      
-      
+      </div>
+      </div>
     </div>
   );
 }
