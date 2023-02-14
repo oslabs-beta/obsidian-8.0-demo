@@ -159,10 +159,12 @@ LFUCache.prototype.read = async function (queryStr) {
 
       // no match with ROOT_QUERY return null or ...
     } else {
-      return undefined;
+      return null;
     }
   }
   // console.log('response Object ', responseObject)
+  console.log('read');
+  console.log(responseObject);
   return { data: responseObject };
 };
 
@@ -176,6 +178,8 @@ LFUCache.prototype.write = async function (queryStr, respObj, deleteFlag) {
   // console.log('queryObj post destructure ', queryObj)
   // console.log('respObj ', respObj)
   const resFromNormalize = normalizeResult(queryObj, respObj, deleteFlag);
+  console.log('resFromNormalize');
+  console.log(resFromNormalize);
   // console.log('resFromNormalize ', resFromNormalize)
   // update the original cache with same reference
   // console.log('res ' ,resFromNormalize)

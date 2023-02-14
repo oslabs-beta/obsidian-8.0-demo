@@ -1,8 +1,11 @@
 import { reset } from "https://deno.land/std@0.152.0/fmt/colors";
+import { useEffect } from "https://esm.sh/v106/@types/react@18.0.27/X-ZC9yZWFjdEAxOC4yLjA/index";
 import { React, useObsidian, BrowserCache, LFUCache } from "../../deps/deps.client.ts";
 import Bar from "./Bar.tsx";
 
 
+import InputField from "./InputField.tsx";
+import  CharacterCards  from "./CharacterCards.tsx"
 /*
 deno install -qAf --unstable https://deno.land/x/denon/denon.ts
 export PATH="/Users/mattweisker/.deno/bin:$PATH"
@@ -15,6 +18,8 @@ const Home = () => {
   // const [person, setPerson] = React.useState({name: '', mass: ''});
   const [search, setSearch] = React.useState('');
   // const [addForm, setAddForm] = React.useState(false)
+  const [getAllDisplay, setGetAllDisplay] = React.useState(false);
+  const [searchInputDisplay, setsearchInputDisplay] = React.useState(false);
   const [addForm, setAddForm] = React.useState(false)
 
 
@@ -115,30 +120,81 @@ const Home = () => {
   // console.log(typeof addContent.height)
  }
 
-//  let personInfo;
-//  if (person.name !== '') {
-//   personInfo = <p>{ person.name }: weight - { person.mass }</p>
-// }
-const addCharacterButton = () => {
-  if (!addForm) setAddForm(true);
-  else {
-      mutate(queryStrAddCharacter)
-      .then(resp => {
-        // console.log('mutation ', resp.data)
-        const data = [resp.data.addPerson]
-        setPeople(data)
-        // setPeople(...people, resp.data)
-      })
-    
+
+  const getAllButton = () => {
+    if (!getAllDisplay) {
+      setGetAllDisplay(true);
+      setAddForm(false);
+      setsearchInputDisplay(false);
+    }
   }
 
+  const searchOneCharButton = () => {
+  if (!searchInputDisplay) {
+    setsearchInputDisplay(true);
+    setAddForm(false);
+    setGetAllDisplay(false);
+  } 
+  else {
+    if (search !== "") {
+      query(queryStrName)
+      .then(resp => {
+        let data = resp.data.onePerson;
+        if (!Array.isArray(data)) {
+          data = [data]
+        }
+        setPeople(data)
+      })
+    }
+  }
 }
 
-let addCharacter;
-if (addForm) {
-  addCharacter = <div>
+const addCharacterButton = () => {
+  if (!addForm) {
+    setAddForm(true);
+    setsearchInputDisplay(false);
+    setGetAllDisplay(false);
+  } 
+  else {
+    mutate(queryStrAddCharacter)
+    .then(resp => {
+      const data = [resp.data.addPerson]
+      setPeople(data)
+    })
+  }
+}
+
+const getAllCharacters = (
+  <div>
+    <p>Get a list of all characters in the database</p>
+    <button
+      onClick={() => {
+        query(queryStr)
+        .then(resp => {
+          setPeople(resp.data.allPeople)
+        })
+      }}
+      >Get All Characters</button>
+  </div>
+)
+
+const searchOneCharacter = (
+  <div>
+    <p>Get information about a single character in the database</p>
+    <input type="text" onChange={(e) => handleChange(e, setSearch)}></input>
+    <button 
+        onClick={() => {
+            searchOneCharButton();
+        }}
+        placeholder="Search by character name"
+    >Search One Character</button>
+  </div>
+)
+
+const addCharacter = (
+  <div>
+    <p>Add a character to the database</p>
     <form className="add-character-form">
-      {/* <div className="add-character-column"> */}
         <div className="add-character-input">
           <label>Name - </label>
           <input onChange={(e) => handleNewChar (e, "name")}></input>
@@ -173,27 +229,18 @@ if (addForm) {
           <label>Height - </label>
           <input onChange={(e) => handleNewChar (e, "height")}></input>
         </div>
-
-
-      {/* <button
-              onClick={() => {
-                mutate(queryStrAddCharacter)
-                .then(resp => {
-                  console.log('mutation ', resp.data)
-                  const data = [resp.data.addPerson]
-                  setPeople(data)
-                  // setPeople(...people, resp.data)
-                })
-              }}
-      >Add Your Character</button> */}
     </form>
+    <button
+      onClick={() => {
+        addCharacterButton()
+      }}
+    >Add Character</button>
   </div>
-}
-// const [addContent, setAddContent] = React.useState({name: '', mass: '', hair: '', skin: '', eye: '', gender: '', height: ''})
 
+)
 
   return (
-    <div>
+    <div className="home-container">
       <div className="opening-crawl">
         <h1>Who has the high ground?</h1>
       </div>
@@ -250,50 +297,46 @@ if (addForm) {
           // if (cacheData) setPerson({name: cacheData.name, mass: cacheData.mass})
           // console.log('person state ', person)
         })
+      <div className="mid-container">
+        <div className="button-container">
+          <div className="get-all-characters">
+            <button
+            onMouseEnter={() => {
+              getAllButton();
+            }}
+            >Get All Characters</button>
+          </div>
+
+          <div className="search-characters">
+            <button 
+              onMouseEnter={() => {
+                if (!searchInputDisplay) {
+                  searchOneCharButton();
+                }
+              }}
+          >Search One Character</button>   
+          </div>
+
+          <div className="add-character">
+            <button
+              onMouseEnter={() => {
+                if (!addForm) {
+                  addCharacterButton()
+                }
+              }}
+            >Add Character</button>
+          </div>
+        </div>  
         
-      }}
-      >Search One Character</button>   
-      </div>
-      
-      <div className="add-form-div">
-        {addCharacter}
-      </div>
-
-      <div className="add-character">
-        <button
-        onClick={() => {
-          addCharacterButton()
-        }}
-        /*
-        onClick={() => {
-          query(queryStrAddCharacter)
-          .then(resp => {
-            console.log('mutation ', resp.data)
-            const data = [resp.data.addPerson]
-            setPeople(data)
-            // setPeople(...people, resp.data)
-          })
-        }}
-        */
-        >Add Character</button>
+        <InputField 
+          addForm={addForm} 
+          addCharacter={addCharacter} 
+          searchInputDisplay={searchInputDisplay} 
+          searchOneCharacter={searchOneCharacter} 
+          getAllCharacters={getAllCharacters}
+          getAllDisplay={getAllDisplay}/>
       </div>
 
-
-
-      {/* <button */}
-      {/* // onClick={() => {
-      //   // setPerson({name: 'Yoda'})
-      //   setPeople([])
-      //   console.log(people)
-      //   console.log(typeof people)
-      // }}
-      // >Console.Log</button> */}
-      {/* <div> */}
-        {/* Single Character
-        { personInfo } */}
-       
-      {/* </div> */}
-      {/* <div style={{"backgroundColor": "aqua", "display": "flex", "width": "100%", "height": "100%", "flex": "1", "border": "1px solid black", "flexDirection": "column", "alignItems": "center", "padding": "20px"}}> */}
       <div>
       {/* <div>   */}
       <div className="character-title">
@@ -309,20 +352,24 @@ if (addForm) {
         }} */}
 
 {/* {"display": "flex", "width": "100%", "justifyContent": "space-around"} */}
-        <div className="total-search-chart">
+        <div className="character-container">
           {people && people.map((char) => (
+            <>
+            <CharacterCards char={char}/>
+            </>
+          
             // console.log(people)  
-            <div className="search-chart">
-              {/* //  <div style={{"backgroundColor": "pink", "display": "flex", "justifyContent": "space-evenly", "height": "100%", "border": "1px solid black"}}> */}
-              <p className="ten">Name - {char.name}</p>
-              <p className="ten">Weight - {char.mass}</p>
-              <p className="ten">Hair-color - {char.hair_color}</p>
-              <p className="ten">Skin-color - {char.skin_color}</p>
-              <p className="ten">Eye-color - {char.eye_color}</p>
-              <p className="ten">Gender - {char.gender}</p>
-              <p className="last-row">Height - {char.height}</p>
+            // <div className="search-chart">
+            //   {/* //  <div style={{"backgroundColor": "pink", "display": "flex", "justifyContent": "space-evenly", "height": "100%", "border": "1px solid black"}}> */}
+            //   <p className="ten">Name - {char.name}</p>
+            //   <p className="ten">Weight - {char.mass}</p>
+            //   <p className="ten">Hair-color - {char.hair_color}</p>
+            //   <p className="ten">Skin-color - {char.skin_color}</p>
+            //   <p className="ten">Eye-color - {char.eye_color}</p>
+            //   <p className="ten">Gender - {char.gender}</p>
+            //   <p className="last-row">Height - {char.height}</p>
 
-            </div>
+            // </div>
 
           ))}
         </div>
@@ -331,6 +378,7 @@ if (addForm) {
 
 
 
+      
       
     </div>
   );

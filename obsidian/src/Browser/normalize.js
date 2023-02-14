@@ -17,7 +17,7 @@ export default function normalizeResult(queryObj, resultObj, deleteFlag) {
     );
 
     //iterate thru the different response objects that were mutated
-
+4
     const obj = resultObj.data;
     //checks if the current element is an array
     if (Array.isArray(obj)) {
@@ -37,8 +37,6 @@ export default function normalizeResult(queryObj, resultObj, deleteFlag) {
 
   // creates a stringified version of query request and stores it in ROOT_QUERY key
   else if (queryObj.queries || queryObj.mutations) {
-    // console.log('doing some shit I donno ', queryObj)
-    // console.log('result Obj ', resultObj)
     if (queryObj.queries) {
       // console.log('result before ', result)
       // console.log('queryObj ', queryObj)
@@ -50,7 +48,8 @@ export default function normalizeResult(queryObj, resultObj, deleteFlag) {
       result["ROOT_MUTATION"] = createRootQuery(queryObj.mutations, resultObj);
     }
     // console.log('resultObj ', resultObj)
-    
+    console.log('test2');
+    console.log(result["ROOT_QUERY"]);
     for (const curr in resultObj.data) {
       // console.log('curr ',curr)
       if (!Array.isArray(resultObj.data[curr])) {
@@ -95,12 +94,16 @@ export default function normalizeResult(queryObj, resultObj, deleteFlag) {
       }
     }
   }
-  // console.log(result);
+  console.log('result');
+  console.log(result);
   return result;
 }
 
 // creates the hashes for query requests and stores the reference hash that will be stored in result
 function createRootQuery(queryObjArr, resultObj) {
+  console.log('queryObjArr + resultObj from createRootQuery')
+  console.log(queryObjArr);
+  console.log(resultObj);
   const output = {};
   queryObjArr.forEach((query) => {
     // if query has an alias declare it
@@ -110,7 +113,8 @@ function createRootQuery(queryObjArr, resultObj) {
     const args = query.arguments;
     const queryHash = name + args;
     const result = resultObj.data[alias] ?? resultObj.data[name];
-
+    console.log('result from createRootQuery')
+    console.log(result);
     // iterate thru the array of current query response
     // and store the hash of that response in an array
     // console.log(result)
@@ -118,7 +122,8 @@ function createRootQuery(queryObjArr, resultObj) {
     if (Array.isArray(result)) {
       const arrOfHashes = [];
       result.forEach((obj) => {
-        // console.log(obj)
+        console.log(obj)
+        console.log(labelId(obj));
         arrOfHashes.push(labelId(obj));
       });
 
@@ -128,6 +133,8 @@ function createRootQuery(queryObjArr, resultObj) {
       output[queryHash] = [labelId(result)];
     }
   });
+  console.log('output');
+  console.log(output);
   return output;
 }
 
