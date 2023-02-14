@@ -201,9 +201,7 @@ function ObsidianWrapper(props) {
           update(cache, responseObj);
         }
         // third behaviour just for normal update (no-delete, no update function)
-        if(!responseObj.errors){
-          cache.write(mutation, responseObj);
-        }
+        if(!responseObj.errors) cache.write(mutation, responseObj);
         console.log('WriteThrough - true ', responseObj);
         return responseObj;
       }
