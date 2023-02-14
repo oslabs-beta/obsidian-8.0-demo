@@ -2,6 +2,8 @@ import { reset } from "https://deno.land/std@0.152.0/fmt/colors";
 import { useEffect } from "https://esm.sh/v106/@types/react@18.0.27/X-ZC9yZWFjdEAxOC4yLjA/index";
 import { React, useObsidian, BrowserCache, LFUCache } from "../../deps/deps.client.ts";
 import Bar from "./Bar.tsx";
+import imageURL from "../photo.json"
+
 
 
 import InputField from "./InputField.tsx";
@@ -19,7 +21,7 @@ const Home = () => {
   const [search, setSearch] = React.useState('');
   // const [addForm, setAddForm] = React.useState(false)
   const [getAllDisplay, setGetAllDisplay] = React.useState(false);
-  const [searchInputDisplay, setsearchInputDisplay] = React.useState(false);
+  const [searchInputDisplay, setSearchInputDisplay] = React.useState(false);
   const [addForm, setAddForm] = React.useState(false)
 
 
@@ -112,13 +114,13 @@ const Home = () => {
     if (!getAllDisplay) {
       setGetAllDisplay(true);
       setAddForm(false);
-      setsearchInputDisplay(false);
+      setSearchInputDisplay(false);
     }
   }
 
   const searchOneCharButton = () => {
   if (!searchInputDisplay) {
-    setsearchInputDisplay(true);
+    setSearchInputDisplay(true);
     setAddForm(false);
     setGetAllDisplay(false);
   } 
@@ -145,7 +147,7 @@ const Home = () => {
 const addCharacterButton = () => {
   if (!addForm) {
     setAddForm(true);
-    setsearchInputDisplay(false);
+    setSearchInputDisplay(false);
     setGetAllDisplay(false);
   } 
   else {
@@ -238,6 +240,13 @@ const addCharacter = (
 
 )
 
+  let searchAll = 'white';
+  let searchOne = 'white';
+  let addOne = 'white';
+  if (getAllDisplay) searchAll = "#2E67F8";
+  if (searchInputDisplay) searchOne = "#EB212E";
+  if (addForm) addOne = "#2FF924";
+
   return (
     <div className="home-container">
       <div className="opening-crawl">
@@ -301,30 +310,33 @@ const addCharacter = (
         <div className="button-container">
           <div className="get-all-characters">
             <button
+            style={{"backgroundImage": `url(${imageURL['Search All']})`, "boxShadow": `0 0 25px ${searchAll}`}}
             onMouseEnter={() => {
               getAllButton();
             }}
-            >Get All Characters</button>
+            ></button>
           </div>
 
           <div className="search-characters">
-            <button 
+            <button
+              style={{"backgroundImage": `url(${imageURL['Search One']})`, "boxShadow": `0 0 25px ${searchOne}`}} 
               onMouseEnter={() => {
                 if (!searchInputDisplay) {
                   searchOneCharButton();
                 }
               }}
-          >Search One Character</button>   
+          ></button>   
           </div>
 
           <div className="add-character">
             <button
+              style={{"backgroundImage": `url(${imageURL['unknown']})`, "boxShadow": `0 0 25px ${addOne}`}}
               onMouseEnter={() => {
                 if (!addForm) {
                   addCharacterButton()
                 }
               }}
-            >Add Character</button>
+            ></button>
           </div>
         </div>  
         
@@ -340,8 +352,6 @@ const addCharacter = (
 
 
       <div>
-      <div className="character-title">
-        Characters
       
       <div className="response-container">
         <div className="character-container">
@@ -357,6 +367,9 @@ const addCharacter = (
         </div>
       </div>
       </div>
+
+      <div className="footer">
+        <p>Copyright © Obsidian 2023</p>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 /** @format */
+import { plural, singular } from "https://deno.land/x/deno_plural/mod.ts";
 
 import normalizeResult from "./normalize.js";
 import destructureQueries from "./destructure.js";
@@ -195,7 +196,13 @@ LFUCache.prototype.write = async function (queryStr, respObj, deleteFlag) {
       const newObj = Object.assign(resp, resFromNormalize[hash]);
       await this.put(hash, newObj);
     } else {
+      const typeName = hash.slice(0, hash.indexOf('~'));
       await this.put(hash, resFromNormalize[hash]);
+      for(const key in this.ROOT_QUERY) {
+        if(key.includes(typeName + 's') || key.includes(plural(typeName))) {
+          this.ROOT_QUERY[key].push(hash);
+        }
+      }
     }
   }
 };
