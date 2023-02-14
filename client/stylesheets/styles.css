@@ -18,7 +18,8 @@ body {
 
 .mid-container {
   display: flex;
-  height: 35vw;
+  height: 25vw;
+  justify-content: center;
   /* border: 1px solid white; */
 }
 
@@ -28,16 +29,16 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 50%;
+  width: 40%;
   /* border: 1px solid white; */
 
 }
 
 .button-container button {
-  width: 10vw;
-  height: 10vw;
+  width: 7vw;
+  height: 7vw;
   padding: 5px;
-  background-size: 10vw;
+  background-size: 7vw;
   border-radius: 40px;
   background-repeat: no-repeat;
   background-position: center center;
@@ -83,6 +84,7 @@ body {
   display: flex;
   justify-content: center;
   padding: 10px;
+  
 }
 /* .add-character button {
   width: 10vw;
@@ -95,17 +97,20 @@ body {
   background-position: center center;
 } */
 .add-character button {
-  background-size: 7vw;
+  background-size: 5vw;
 }
 
 #input-field {
-  width: 50%;
-  background-color: lightslategray;
+  width: 40%;
+  /* background-color: lightslategray; */
+  border-radius: 20%;
   margin-left: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0);
+  
 }
 
 #input-field div {
@@ -115,6 +120,16 @@ body {
 
 #input-field div button {
   width: 100%;
+}
+
+#death-star {
+  width: 23.5vw;
+  height: 23.5vw;
+  background-image: url("https://toppng.com//public/uploads/preview/the-death-star-star-wars-death-star-11562902961caqjz9dfv9.png");
+  background-size: 25vw;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .add-character-form  {

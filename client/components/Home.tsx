@@ -139,6 +139,7 @@ const Home = () => {
         if (!dataCopy[query]) dataCopy[query] = [];
         dataCopy[query].push(resp.time)
         setCallData(dataCopy)
+        setSearchInputDisplay(false)
       })
     }
   }
@@ -155,6 +156,7 @@ const addCharacterButton = () => {
     .then(resp => {
       const data = [resp.data.addPerson]
       setPeople(data)
+      setAddForm(false)
     })
   }
 }
@@ -173,6 +175,7 @@ const getAllCharacters = (
           if (!dataCopy[query]) dataCopy[query] = [];
           dataCopy[query].push(resp.time)
           setCallData(dataCopy)
+          setGetAllDisplay(false)
         })
       }}
       >Get All Characters</button>
