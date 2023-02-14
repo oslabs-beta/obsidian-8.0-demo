@@ -246,12 +246,13 @@ body {
   border-style: solid solid none solid;
   margin: none;
   border-radius: 5px 5px 0 0;
+}
 
 .home-container {
- 
   display: flex;
   flex-direction: column;
 }
+
 .character-container {
   margin-left: 2.5%;
   border-radius: 8px;

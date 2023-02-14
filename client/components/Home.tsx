@@ -144,6 +144,12 @@ const Home = () => {
           data = [data]
         }
         setPeople(data)
+        const query = `Search For ${search}`
+        setCurrentQuery(query)
+        const dataCopy = {...callData};
+        if (!dataCopy[query]) dataCopy[query] = [];
+        dataCopy[query].push(resp.time)
+        setCallData(dataCopy)
       })
     }
   }
@@ -172,6 +178,12 @@ const getAllCharacters = (
         query(queryStr)
         .then(resp => {
           setPeople(resp.data.allPeople)
+          const query = "Search All Characters"
+          setCurrentQuery(query)
+          const dataCopy = {...callData};
+          if (!dataCopy[query]) dataCopy[query] = [];
+          dataCopy[query].push(resp.time)
+          setCallData(dataCopy)
         })
       }}
       >Get All Characters</button>
@@ -247,7 +259,7 @@ const addCharacter = (
 
 
       
-      <div className="get-all-characters">
+      {/* <div className="get-all-characters">
         <button
         onClick={() => {
           query(queryStr)
@@ -296,7 +308,8 @@ const addCharacter = (
           setCallData(dataCopy)
           // if (cacheData) setPerson({name: cacheData.name, mass: cacheData.mass})
           // console.log('person state ', person)
-        })
+        }) */}
+      
       <div className="mid-container">
         <div className="button-container">
           <div className="get-all-characters">
@@ -337,6 +350,8 @@ const addCharacter = (
           getAllDisplay={getAllDisplay}/>
       </div>
 
+
+
       <div>
       {/* <div>   */}
       <div className="character-title">
@@ -352,24 +367,13 @@ const addCharacter = (
         }} */}
 
 {/* {"display": "flex", "width": "100%", "justifyContent": "space-around"} */}
+
+
         <div className="character-container">
           {people && people.map((char) => (
             <>
             <CharacterCards char={char}/>
             </>
-          
-            // console.log(people)  
-            // <div className="search-chart">
-            //   {/* //  <div style={{"backgroundColor": "pink", "display": "flex", "justifyContent": "space-evenly", "height": "100%", "border": "1px solid black"}}> */}
-            //   <p className="ten">Name - {char.name}</p>
-            //   <p className="ten">Weight - {char.mass}</p>
-            //   <p className="ten">Hair-color - {char.hair_color}</p>
-            //   <p className="ten">Skin-color - {char.skin_color}</p>
-            //   <p className="ten">Eye-color - {char.eye_color}</p>
-            //   <p className="ten">Gender - {char.gender}</p>
-            //   <p className="last-row">Height - {char.height}</p>
-
-            // </div>
 
           ))}
         </div>
