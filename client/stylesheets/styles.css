@@ -7,24 +7,20 @@
   font-size: 4vw;
   padding: 10px;
 }
-
 .opening-crawl h1 {
   color: yellow;
   text-align: center;
 }
-
 .get-all-characters {
   display: flex;
   justify-content: center;
   padding: 10px;
 }
-
 .get-all-characters button {
   width: 8%;
   padding: 5px;
   border-radius: 10px;
 }
-
 .search-characters {
   display: flex;
   justify-content: center;
@@ -32,7 +28,6 @@
   border-top: 1px solid black;
   border-bottom: 1px solid black;
 }
-
 .search-characters input {
   width: 8%;
   border-radius: 10px;
@@ -43,7 +38,6 @@
   margin-left: 15px;
   border-radius: 10px;
 }
-
 .add-character {
   display: flex;
   justify-content: center;
@@ -66,19 +60,15 @@
   padding: 10px;
 
 }
-
 .add-character-input {
   display: flex;
   justify-content: space-between;
   padding: 10px;
 }
-
 .add-character-input input {
   width: 150px;
   margin-left: 5px;
 }
-
-
 .character-title {
   display: flex;
   justify-content: center;
@@ -96,16 +86,13 @@
   display: flex;
   justify-content: start;
 }
-
 .ten {
   width: 15%;
 }
-
 .last-row {
   width: 10%;
 }
 .home-container {
- 
   display: flex;
   flex-direction: column;
 }
@@ -126,7 +113,6 @@
   margin-bottom: 12px;
 }
 .left-container {
-
   display: flex;
   flex: .75;
   flex-direction: column;
@@ -134,19 +120,15 @@
   margin-top: 20px;
   /* border: 1px solid lightblue; */
 }
-
 .test-image {
   max-width: 80%;
   border-radius: 10px;
-  margin-top: 15px;
-  
+  margin-top: 15px; 
 }
-
 .character-name {
 
   font-size: 34px;
 }
-
 .right-container{
   display: flex;
   flex: 1;
@@ -158,8 +140,7 @@
   /* border: 1px solid pink; */
   flex-direction: column;
   justify-content: space-around;
-  padding-left: 50px;
-  
+  padding-left: 50px; 
 }
 .column-two {
   display:flex;
@@ -168,7 +149,6 @@
   flex-direction: column;
   justify-content: space-around;
   padding-left: 50px;
- 
 }
 .column-item {
   border: 1px solid rgb(10, 10, 10);
@@ -176,11 +156,8 @@
   padding: 5px;
   width: fit-content;
   font-size: 18px;
-  
 }
-
 .column-item:hover {
   background-color: rgb(252, 249, 215);
-  
 }
 
