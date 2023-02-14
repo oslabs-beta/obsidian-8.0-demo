@@ -110,17 +110,59 @@ body {
   align-items: center;
   justify-content: center;
   background-color: rgba(255, 255, 255, 0);
-  
 }
 
 #input-field div {
+  /* border: 1px solid white; */
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-#input-field div button {
-  width: 100%;
+#input-field p {
+  text-align: center;
+  font-size: 2.5vw;
+  color: white;
+  text-shadow: 0 0 3px black;
 }
+
+#input-field label {
+  font-size: 1.5vw;
+  font-weight: bold;
+  text-shadow: 0 0 3px white;
+
+}
+
+#input-field input {
+  width: 10vw;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 30%;
+  text-align: center;
+
+}
+
+#input-field input:active {
+  border: 3px solid black;
+}
+
+#input-field button {
+  width: 5vw;
+  height: 5vw;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  /* justify-self: start; */
+}
+
+#input-field button:hover {
+  box-shadow: 0 0 20px white;
+
+}
+
+
 
 #death-star {
   width: 23.5vw;
@@ -316,6 +358,7 @@ body {
   max-height: 40%;
   border-radius: 10px;
   margin-top: 15px; 
+  box-shadow: 3px 3px 5px white;
 }
 .character-name {
 

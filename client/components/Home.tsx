@@ -178,7 +178,7 @@ const getAllCharacters = (
           setGetAllDisplay(false)
         })
       }}
-      >Get All Characters</button>
+      >Search All</button>
   </div>
 )
 
@@ -191,7 +191,7 @@ const searchOneCharacter = (
             searchOneCharButton();
         }}
         placeholder="Search by character name"
-    >Search One Character</button>
+    >Search One</button>
   </div>
 )
 
@@ -238,7 +238,7 @@ const addCharacter = (
       onClick={() => {
         addCharacterButton()
       }}
-    >Add Character</button>
+    >Add</button>
   </div>
 
 )
