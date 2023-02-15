@@ -26,7 +26,7 @@ const Home = () => {
 
 
   // const [addContent, setAddContent] = React.useState({name: '', mass: '', hair: '', skin: '', eye: '', gender: '', height: ''})
-  const [addContent, setAddContent] = React.useState({name: 'Mike Landswimmer', mass: '420', hair: 'Obsidian', skin: 'Obsidian', eye: 'Obsidian', gender: 'Flexible', height: 10})
+  const [addContent, setAddContent] = React.useState({name: 'Mike Landswimmer', mass: '420', hair: 'Obsidian', skin: 'Obsidian', eye: 'Obsidian', gender: 'Flexible', height: 10, url: ''})
 
 
   const [callData, setCallData] = React.useState({});
@@ -107,6 +107,7 @@ const Home = () => {
   newContent[key] = event.target.value
   if (key === 'height') newContent[key] = Number(event.target.value)
   setAddContent(newContent)
+  console.log(addContent)
  }
 
 
@@ -196,20 +197,35 @@ const searchOneCharacter = (
 )
 
 const addCharacter = (
-  <div>
+  <div className="input-field-div">
     <p>Add a character to the database</p>
     <form className="add-character-form">
+      <div id="add-input-row-1">
+
         <div className="add-character-input">
           <label>Name - </label>
           <input onChange={(e) => handleNewChar (e, "name")}></input>
         </div>
 
         <div className="add-character-input">
+          <label>Height - </label>
+          <input onChange={(e) => handleNewChar (e, "height")}></input>
+        </div>
+
+        <div className="add-character-input">
           <label>Mass - </label>
           <input onChange={(e) => handleNewChar (e, "mass")}></input>
         </div>
-        
+
         <div className="add-character-input">
+          <label>Gender - </label>
+          <input onChange={(e) => handleNewChar (e, "gender")}></input>
+        </div>
+
+      </div>
+      <div id="add-input-row-2">
+
+      <div className="add-character-input">
           <label>Hair-Color - </label>
           <input onChange={(e) => handleNewChar (e, "hair")}></input>
         </div>
@@ -225,14 +241,10 @@ const addCharacter = (
         </div>
 
         <div className="add-character-input">
-          <label>Gender - </label>
-          <input onChange={(e) => handleNewChar (e, "gender")}></input>
+          <label>Image URL - </label>
+          <input onChange={(e) => handleNewChar (e, "url")}></input>
         </div>
-
-        <div className="add-character-input">
-          <label>Height - </label>
-          <input onChange={(e) => handleNewChar (e, "height")}></input>
-        </div>
+      </div>
     </form>
     <button
       onClick={() => {

@@ -29,7 +29,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  width: 40%;
+  width: 20vw;
   /* border: 1px solid white; */
 
 }
@@ -101,7 +101,7 @@ body {
 }
 
 #input-field {
-  width: 40%;
+  width: 50vw;
   /* background-color: lightslategray; */
   border-radius: 20%;
   margin-left: 10px;
@@ -112,12 +112,12 @@ body {
   background-color: rgba(255, 255, 255, 0);
 }
 
-#input-field div {
+.input-field-div {
   /* border: 1px solid white; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 #input-field p {
@@ -125,6 +125,7 @@ body {
   font-size: 2.5vw;
   color: white;
   text-shadow: 0 0 3px black;
+  margin: 0;
 }
 
 #input-field label {
@@ -176,21 +177,45 @@ body {
 
 .add-character-form  {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin: auto;
-  width: 70%;
-  flex-wrap: wrap;
+  /* margin: auto; */
+  /* width: 70%; */
   padding: 5px;
   min-width: 530px;
 }
+
+.add-character-form label {
+  text-align: center;
+}
+
+#add-input-row-1 {
+  /* border: 1px solid white; */
+  display: flex;
+  /* width: 100%; */
+  margin: 1% 0 0.5% 0;
+
+}
+
+#add-input-row-2 {
+  /* border: 1px solid white; */
+  display: flex;
+  margin: 1% 0 0.5% 0;
+
+}
+
 .add-character-input {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   padding: 10px;
+  flex-shrink: 1;
 }
 .add-character-input input {
-  width: 150px;
-  margin-left: 5px;
+  /* width: 10vw; */
+  flex-shrink: 1;
+  padding: 5px;
+  /* margin-left: 5px; */
 }
 
 .character-title {
