@@ -163,8 +163,10 @@ const addCharacterButton = () => {
 }
 
 const getAllCharacters = (
-  <div>
-    <p>Get a list of all characters in the database</p>
+  <div className="input-field-div">
+    <div className="input-no-button">
+      <p>Get a list of all characters in the database</p>
+    </div>
     <button
       onClick={() => {
         query(queryStr)
@@ -179,73 +181,77 @@ const getAllCharacters = (
           setGetAllDisplay(false)
         })
       }}
-      >Search All</button>
+      >All</button>
   </div>
 )
 
 const searchOneCharacter = (
-  <div>
-    <p>Get information about a single character in the database</p>
-    <input type="text" onChange={(e) => handleChange(e, setSearch)}></input>
+  <div className="input-field-div">
+    <div className="input-no-button">
+      <p>Get information about a single character in the database</p>
+      <input className="character-search" type="text" onChange={(e) => handleChange(e, setSearch)}></input>
+    </div>
     <button 
         onClick={() => {
             searchOneCharButton();
         }}
         placeholder="Search by character name"
-    >Search One</button>
+    >One</button>
   </div>
 )
 
 const addCharacter = (
   <div className="input-field-div">
-    <p>Add a character to the database</p>
-    <form className="add-character-form">
-      <div id="add-input-row-1">
+    <div className="input-no-button">
+      <p>Add a character to the database</p>
+      <form className="add-character-form">
+        <div id="add-input-row-1">
+
+          <div className="add-character-input">
+            <label>Name</label>
+            <input onChange={(e) => handleNewChar (e, "name")}></input>
+          </div>
+
+          <div className="add-character-input">
+            <label>Height</label>
+            <input onChange={(e) => handleNewChar (e, "height")}></input>
+          </div>
+
+          <div className="add-character-input">
+            <label>Mass</label>
+            <input onChange={(e) => handleNewChar (e, "mass")}></input>
+          </div>
+
+          <div className="add-character-input">
+            <label>Gender</label>
+            <input onChange={(e) => handleNewChar (e, "gender")}></input>
+          </div>
+
+        </div>
+        <div id="add-input-row-2">
 
         <div className="add-character-input">
-          <label>Name - </label>
-          <input onChange={(e) => handleNewChar (e, "name")}></input>
-        </div>
+            <label>Hair-Color</label>
+            <input onChange={(e) => handleNewChar (e, "hair")}></input>
+          </div>
 
-        <div className="add-character-input">
-          <label>Height - </label>
-          <input onChange={(e) => handleNewChar (e, "height")}></input>
-        </div>
+          <div className="add-character-input">
+            <label>Skin-Color</label>
+            <input onChange={(e) => handleNewChar (e, "skin")}></input>
+          </div>
 
-        <div className="add-character-input">
-          <label>Mass - </label>
-          <input onChange={(e) => handleNewChar (e, "mass")}></input>
-        </div>
+          <div className="add-character-input">
+            <label>Eye-Color</label>
+            <input onChange={(e) => handleNewChar (e, "eye")}></input>
+          </div>
 
-        <div className="add-character-input">
-          <label>Gender - </label>
-          <input onChange={(e) => handleNewChar (e, "gender")}></input>
+          <div className="add-character-input">
+            <label>Image URL</label>
+            <input onChange={(e) => handleNewChar (e, "url")}></input>
+          </div>
         </div>
-
-      </div>
-      <div id="add-input-row-2">
-
-      <div className="add-character-input">
-          <label>Hair-Color - </label>
-          <input onChange={(e) => handleNewChar (e, "hair")}></input>
-        </div>
-
-        <div className="add-character-input">
-          <label>Skin-Color - </label>
-          <input onChange={(e) => handleNewChar (e, "skin")}></input>
-        </div>
-
-        <div className="add-character-input">
-          <label>Eye-Color - </label>
-          <input onChange={(e) => handleNewChar (e, "eye")}></input>
-        </div>
-
-        <div className="add-character-input">
-          <label>Image URL - </label>
-          <input onChange={(e) => handleNewChar (e, "url")}></input>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
     <button
       onClick={() => {
         addCharacterButton()

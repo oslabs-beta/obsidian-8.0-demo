@@ -1,7 +1,10 @@
 
 body {
   background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
+}
 
+input:focus {
+  outline: 2px solid black ! important;
 }
 
 .opening-crawl {
@@ -42,6 +45,7 @@ body {
   border-radius: 40px;
   background-repeat: no-repeat;
   background-position: center center;
+  background-color: white;
   /* box-shadow: 0px 0px 25px white; */
 }
 
@@ -51,6 +55,8 @@ body {
   padding: 10px;
 
 }
+
+
 /* .get-all-characters button {
   width: 10vw;
   height: 10vw;
@@ -114,10 +120,24 @@ body {
 
 .input-field-div {
   /* border: 1px solid white; */
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+}
+
+.character-search {
+  margin-top: 5%;
+  /* justify-self: end; */
+}
+
+.input-no-button {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #input-field p {
@@ -152,10 +172,15 @@ body {
   width: 5vw;
   height: 5vw;
   border-radius: 50%;
-  background-color: black;
+  /* background-color: black; */
+  background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
+
   color: white;
   font-weight: bold;
   /* justify-self: start; */
+  position: relative;
+  bottom: 0px;
+  margin-bottom: 10px;
 }
 
 #input-field button:hover {
@@ -359,35 +384,61 @@ body {
   display:flex;
   flex-direction: column;
   width: 42.5%;
-  height: 80%;
+  height: 20vw;
   overflow-y: auto;
 }
 .character-card {
   border: 2px solid rgb(10, 10, 10);
-  background-color: rgb(244, 244, 244);
-  border-radius: 8px;
+  background-color: #71797ECC;
+  border-radius: 18%;
   display: flex;
   flex-direction: row;
-  margin-bottom: 12px;
+  margin-bottom: 2vw;
+  height: 20vw;
 }
 .left-container {
   display: flex;
-  flex: .75;
+  /* flex: .75; */
   flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+  /* align-items: center; */
+  /* margin-top: 20px; */
   /* border: 1px solid lightblue; */
+  height: 20vw;
+  width: 10vw;
+}
+
+.img-div {
+  /* border: 1px solid red; */
+  height: 10vw;
+  width: 10vw;
+  width: 100%;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+
+.char-name-div {
+  /* border: 1px solid green; */
+  height: 10vw;
+  width: 10vw;
+  width: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: center;
 }
 .character-image {
-  max-width: 80%;
-  max-height: 40%;
+  max-width: 8vw;
+  max-height: 8vw;
   border-radius: 10px;
   margin-top: 15px; 
   box-shadow: 3px 3px 5px white;
 }
 .character-name {
-
-  font-size: 34px;
+  font-size: 2vw;
+  color: white;
+  font-weight: bold;
+  text-shadow: 0 0 5px black;
+  text-align: center;
 }
 .right-container{
   display: flex;
@@ -400,7 +451,7 @@ body {
   /* border: 1px solid pink; */
   flex-direction: column;
   justify-content: space-around;
-  padding-left: 50px; 
+  /* padding-left: 50px;  */
 }
 .column-two {
   display:flex;
@@ -408,14 +459,45 @@ body {
   /* border: 1px solid blue; */
   flex-direction: column;
   justify-content: space-around;
-  padding-left: 50px;
+  /* padding-left: 50px; */
+}
+
+.trait-box {
+  width: 100%;
+  height: 33.3%;
+  /* border: 3px solid slateblue; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.trait-box p {
+  margin: 0;
+}
+.description {
+  border-radius: 55%;
+  /* background-color: rgba(0, 0, 0, 0.852); */
+  font-size: 1.5vw;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  text-shadow: 0 0 5px white;
+  padding: 5px;
+
 }
 .column-item {
-  border: 1px solid rgb(10, 10, 10);
-  border-radius: 5px;
+  /* border: 1px solid rgb(10, 10, 10); */
+  border-radius: 90%;
+  box-shadow: 0 0 3px white;
+  background-color: rgba(255, 255, 255, 0.902);
   padding: 5px;
-  width: fit-content;
-  font-size: 18px;
+  /* width: fit-content;
+  height: fit-content; */
+  width: 75%;
+  height: 40%;
+  font-size: 2vw;
+  text-align: center;
 }
 .column-item:hover {
   background-color: rgb(252, 249, 215);
@@ -424,7 +506,7 @@ body {
 .response-container {
   display: flex;
   width: 100%;
-  height: 400px;
+  height: 35vw;
   justify-content: space-around;
   align-items: center;
 }

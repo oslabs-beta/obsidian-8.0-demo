@@ -12,19 +12,41 @@ const CharacterCards = (props) => {
   <div className="character-card">
     <div className="left-container">
       {/* <img className="test-image" src="https://images.bauerhosting.com/legacy/empire-images/features/560ebc7b50e6c513721c309f/Ben%20Kenobi.jpg?q=80&w=1800&ar=16:9&fit=crop&crop=top"/> */}
-      <img className="character-image" src={photo}/>
-      <p className="character-name">{char.name}</p>
+      <div className="img-div">
+        <img className="character-image" src={photo}/>
+      </div>
+      <div className="char-name-div">
+        <p className="character-name">{char.name}</p>
+      </div>
         </div>
           <div className="right-container">
             <div className="column-one">
-              <p className="column-item">Height: {char.height}</p>
-              <p className="column-item">Hair: {char.hair_color}</p>
-              <p className="column-item">Eyes: {char.eye_color}</p>
+              <div className="trait-box">
+                <p className="description">Height:</p>
+                <p className="column-item">{char.height}</p>
+              </div>
+              <div className="trait-box">
+                <p className="description">Hair:</p>
+                <p className="column-item">{char.hair_color}</p>
+              </div>
+              <div className="trait-box">
+                <p className="description">Eyes:</p>
+                <p className="column-item">{char.eye_color}</p> 
+              </div>
             </div>
             <div className="column-two">
-              <p className="column-item">Weight: {char.mass}</p>
-              <p className="column-item">Skin: {char.skin_color}</p>
-              <p className="column-item">Gender: {char.gender}</p>
+            <div className="trait-box">
+              <p className="description">Weight:</p>
+              <p className="column-item">{char.mass}</p>
+            </div>
+            <div className="trait-box">
+              <p className="description">Skin:</p>
+              <p className="column-item">{char.skin_color}</p>
+            </div>
+            <div className="trait-box">
+              <p className="description">Gender:</p>
+              <p className="column-item">{char.gender}</p>
+            </div>
             </div>
       </div>
     </div>
