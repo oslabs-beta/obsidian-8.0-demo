@@ -7,16 +7,18 @@ input:focus {
   outline: 2px solid black ! important;
 }
 
-.opening-crawl {
+/* .opening-crawl {
   display: flex;
   justify-content: center;
-  border-radius: 10px;
-  font-size: 4vw;
+  font-size: 3vw;
   padding: 10px;
-}
-.opening-crawl h1 {
+} */
+h1 {
   color: yellow;
   text-align: center;
+  font-size: 6vw;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .mid-container {
@@ -176,6 +178,7 @@ input:focus {
   background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
 
   color: white;
+  font-size: 1.5vw;
   font-weight: bold;
   /* justify-self: start; */
   position: relative;
@@ -253,7 +256,7 @@ input:focus {
   /* min-height: 200px; */
 }
 
-.search-chart {
+/* .search-chart {
   display: flex;
   justify-content: space-between;
   padding-left: 50px;
@@ -270,17 +273,20 @@ input:focus {
 }
 .last-row {
   width: 10%;
-}
+} */
 
 .bar-graph {
   display: grid;
-  height: 100%;
+  height: 20vw;
+  width: 42vw;
+  margin-left: 2.5vw;
+  /* margin-bottom: 2vw; */
   /* width: 100%; */
-  grid-template-columns: 75px auto;
-  grid-template-rows: 50px auto 50px;
+  grid-template-columns: 5vw 1fr;
+  grid-template-rows: 3vw 14vw 2vw;
   padding: 10px;
-  background-color: lightslategray;
-  border-radius: 10px;
+  background-color: #71797ECC;
+  border-radius: 18%;
 }
 
 .bar-graph div {
@@ -292,7 +298,8 @@ input:focus {
   grid-column-start: 1;
   grid-column-end: 3;
   font-size: 2vw;
-  color: yellow
+  color: yellow;
+  text-shadow: 0 0 5px black;
 
 }
 
@@ -310,7 +317,10 @@ input:focus {
   /* border: 1px solid green; */
   transform: rotate(-90deg);
   font-size: 2vw;
-  height: 10px;
+  height: 3vw;
+  width: 14vw;
+  text-shadow: 0 0 5px white;
+  text-align: center;
 }
 
 .x-label {
@@ -318,11 +328,16 @@ input:focus {
   height: 100%;
   font-size: 1vw;
   color: white;
-  justify-content: space-between;
+  margin-right: 10px;
+  /* justify-content: space-between; */
 }
 
 .x-label p {
-  margin-bottom: 50px;
+  margin-bottom: 4vw;
+  background-image: radial-gradient(black, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+  border-radius: 40%;
+  font-weight: bold;
+  padding: 1px 3px;
 }
 
 .bar-graph-display {
@@ -342,6 +357,7 @@ input:focus {
   /* border: 1px solid purple; */
   padding: 10px;
   font-size: 2vw;
+  text-shadow: 0 0 5px white;
 
 }
 
@@ -358,7 +374,16 @@ input:focus {
 }
 
 .bar-column p {
-  /* border: 1px solid black; */
+  /* border: 1px solid white; */
+  background-image: radial-gradient(white, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2));
+  box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.2);
+  border-radius: 40%;
+  font-weight: bold;
+  font-size: 1.5vw;
+  padding: 1px 3px;
+  margin-bottom: 12px;
+  /* text-shadow: 0 0 1px black; */
+
   margin: 0;
 }
 
@@ -369,9 +394,17 @@ input:focus {
   background-color: black;
   border: 20px;
   /* border: 1px black; */
-  border-style: solid solid none solid;
   margin: none;
-  border-radius: 5px 5px 0 0;
+  border-radius: 5% 5% 0 0;
+  margin-top: 2px;
+  border: 1px black;
+  border-style: solid solid none solid;
+}
+
+.bar-data:hover {
+  border: 2px white;
+  border-style: groove groove none groove;
+  box-shadow: 0 0 5px white;
 }
 
 .home-container {
@@ -383,8 +416,9 @@ input:focus {
   border-radius: 8px;
   display:flex;
   flex-direction: column;
-  width: 42.5%;
+  width: 42vw;
   height: 20vw;
+  margin-right: 2.5vw;
   overflow-y: auto;
 }
 .character-card {
@@ -490,7 +524,11 @@ input:focus {
   /* border: 1px solid rgb(10, 10, 10); */
   border-radius: 90%;
   box-shadow: 0 0 3px white;
-  background-color: rgba(255, 255, 255, 0.902);
+  /* background-color: rgba(255, 255, 255, 0.902); */
+  /* background-image: radial-gradient(white, rgba(255, 255, 255, 0.2)); */
+  background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
+  color: white;
+  box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.1);
   padding: 5px;
   /* width: fit-content;
   height: fit-content; */
@@ -500,21 +538,28 @@ input:focus {
   text-align: center;
 }
 .column-item:hover {
+  background-image: none;
   background-color: rgb(252, 249, 215);
+  color: black;
 }
 
 .response-container {
   display: flex;
   width: 100%;
-  height: 35vw;
-  justify-content: space-around;
+  height: 25vw;
+  justify-content: center;
   align-items: center;
 }
 
-.graph-container {
-  width: 42.5%;
-  height: 90%;
-}
+/* .graph-container {
+  width: 42vw;
+  height: 20vw;
+  margin-bottom: 2vw;
+} */
+
+/* .graph-container div {
+  height: 20vw;
+} */
 
 .footer {
   color: yellow;

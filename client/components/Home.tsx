@@ -156,8 +156,10 @@ const addCharacterButton = () => {
     mutate(queryStrAddCharacter)
     .then(resp => {
       const data = [resp.data.addPerson]
-      setPeople(data)
-      setAddForm(false)
+      setPeople(data);
+      setAddForm(false);
+      setCurrentQuery('');
+      imageURL[addContent.name] = addContent.url
     })
   }
 }

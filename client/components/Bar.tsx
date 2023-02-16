@@ -10,7 +10,7 @@ const Bar = (props: any) => {
   console.log('props ', props)
   let graph;
 
-  const colors = ['crimson', 'forestgreen', 'dodgerblue']
+  const colors = ['#2E67F8CC', '#EB212ECC', '#228B22CC']
 
   if (currentQuery !== '') {
     const max: number = Math.max(...callData[currentQuery])
@@ -34,7 +34,7 @@ const Bar = (props: any) => {
       {callData[search] && callData[search].map((time: number, i: number) => (
         <div className="bar-column" >
           <p style={{"color": `${colors[i%3]}`}} >{time}</p>
-          <div className="bar-data" style={{"height": `${(time / max) * 100 }%`, "backgroundColor": `${colors[i % 3]}`, "border": `${colors[i % 3]}`}}>
+          <div className="bar-data" style={{"height": `${(time / max) * 100 }%`, "backgroundColor": `${colors[i % 3]}`}}>
           </div>
         </div>
       ))}
