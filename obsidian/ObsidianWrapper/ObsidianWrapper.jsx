@@ -6,7 +6,7 @@ import { insertTypenames } from '../src/Browser/insertTypenames.js';
 const cacheContext = React.createContext();
 
 function ObsidianWrapper(props) {
-  const [cache, setCache] = React.useState(new LFUCache(200));
+  const [cache, setCache] = React.useState(new LFUCache(2000));
   // console.log('first ', cache)
 
   // You have to put your Google Chrome Obsidian developer tool extension id to connect Obsidian Wrapper with dev tool

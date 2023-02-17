@@ -11,6 +11,46 @@
   font-display: swap;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-position: center;
+  background-attachment: fixed;
+  /* background-size: cover; */
+  background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
+  width: 1.5vw;
+  animation: fade-in 0.5s ease-in;
+}
+
+::-webkit-scrollbar-track:hover {
+  /* background: red; */
+}
+
+::-webkit-scrollbar-thumb {
+  background-image: radial-gradient(black, white);
+  box-shadow: 0 0 5px white;
+  border-radius: 50%;
+  width: 1vw;
+  animation: fade-in 0.5s ease-in;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+
+@keyframes expand-horizontal {
+  from {width: 0px; background-color: white;}
+  to {width: 50vw;}
+}
+
+@keyframes fade-in {
+  from {opacity: 0; background-color: white;}
+  to {opacity: 1;}
+}
+
+
 
 body {
   background-position: center;
@@ -126,6 +166,9 @@ h1 {
 }
 
 #input-field {
+  /* width: 0px; */
+  /* animation-name: expand;
+  animation-duration: 2s; */
   width: 50vw;
   /* background-color: lightslategray; */
   border-radius: 20%;
@@ -137,13 +180,27 @@ h1 {
   background-color: rgba(255, 255, 255, 0);
 }
 
+.search-all {
+  background-color: #2E67F8CC;
+}
+.search-one {
+  background-color: #EB212ECC;
+}
+.add-one {
+  background-color: #2FF924CC;
+}
+
 .input-field-div {
   /* border: 1px solid white; */
   height: 100%;
+  /* width: 50vw; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  animation: expand-horizontal 0.4s ease-in;
+  width: 50vw;
+  border-radius: 20%;
 }
 
 .character-search {
@@ -153,6 +210,7 @@ h1 {
 
 .input-no-button {
   height: 80%;
+  width: 40vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -307,6 +365,8 @@ h1 {
   padding: 10px;
   background-color: #71797ECC;
   border-radius: 18%;
+  animation: fade-in 0.5s ease-in;
+
 }
 
 .bar-graph div {
@@ -440,6 +500,7 @@ h1 {
   height: 20vw;
   margin-right: 2.5vw;
   overflow-y: auto;
+
 }
 .character-card {
   border: 2px solid rgb(10, 10, 10);
@@ -449,6 +510,8 @@ h1 {
   flex-direction: row;
   margin-bottom: 2vw;
   height: 20vw;
+  animation: fade-in 0.5s ease-in;
+
 }
 .left-container {
   display: flex;
@@ -572,6 +635,7 @@ h1 {
   height: 25vw;
   justify-content: center;
   align-items: center;
+
 }
 
 /* .graph-container {

@@ -27,7 +27,7 @@ const Home = () => {
 
 
   // const [addContent, setAddContent] = React.useState({name: '', mass: '', hair: '', skin: '', eye: '', gender: '', height: ''})
-  const [addContent, setAddContent] = React.useState({name: 'Mike Landswimmer', mass: '10', hair: 'Obsidian', skin: 'Obsidian', eye: 'Obsidian', gender: 'Flexible', height: 10, url: 'https://pbs.twimg.com/media/CcoloGvW4AArVcK.jpg'})
+  const [addContent, setAddContent] = React.useState({name: 'Mike Landswimmer', mass: '10', hair: 'Obsidian', skin: 'Obsidian', eye: 'Obsidian', gender: 'Flexible', height: 10, url: ''})
 
 
   const [callData, setCallData] = React.useState({});
@@ -180,7 +180,7 @@ const addCharacterButton = () => {
 }
 
 const getAllCharacters = (
-  <div className="input-field-div">
+  <div className="input-field-div search-all">
     <div className="input-no-button">
       <p>Get a list of all characters in the database</p>
     </div>
@@ -205,7 +205,7 @@ const getAllCharacters = (
 )
 
 const searchOneCharacter = (
-  <div className="input-field-div">
+  <div className="input-field-div search-one">
     <div className="input-no-button">
       <p>Get information about a single character in the database</p>
       <input className="character-search" type="text" onChange={(e) => handleChange(e, setSearch)}></input>
@@ -220,7 +220,7 @@ const searchOneCharacter = (
 )
 
 const addCharacter = (
-  <div className="input-field-div">
+  <div className="input-field-div add-one">
     <div className="input-no-button">
       <p>Add a character to the database</p>
       <form className="add-character-form">

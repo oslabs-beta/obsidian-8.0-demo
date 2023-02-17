@@ -11,12 +11,14 @@ const InputField = (props) => {
   if (!getAllDisplay && !searchInputDisplay && !addForm) background = "rgba(0, 0, 0, 0)";
  
   return(
-    <div id="input-field" style={{"backgroundColor": `${background}`, "boxShadow": `0 0 25px ${background}`}} >
+    // <div id="input-field" style={{"backgroundColor": `${background}`, "boxShadow": `0 0 25px ${background}`}} >
+    <div id="input-field">
       {getAllDisplay ? getAllCharacters : null}
       {searchInputDisplay ? searchOneCharacter : null}
       {addForm ? addCharacter : null}
       {!getAllDisplay && !searchInputDisplay && !addForm ? deathStar : null}
     </div>
+
   )
 }
 export default InputField;

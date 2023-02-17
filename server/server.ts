@@ -85,24 +85,19 @@ router.get('/styles.css', async (ctx) => {
 });
 
 router.post('/:path+', async (ctx, next) => {
-  // writeJsonSync('../target.json', {ctx.response.body.name}, {append: true});
-    console.log('in the back end')
     const data = await ctx.request.body().value;
-    //console.log(data.name)
-    //console.log(data.url)
     const charName = data.name;
     const url = data.url
-    console.log(data.json)
-    const json = {}
-    // const json: any = readJsonSync('./client/target.json')
-    console.log(json)
+    const json = data.json
+
+    // photo.json holds standard names and better format, keep as back up
+    // const json: any = readJsonSync('./client/photo.json')
+
     json[charName] = url;
     const newJson = writeJsonSync('./client/target.json', json);
-    // console.log(await ctx.request.body().value.url);
-    //console.log(ctx.request);
+
     ctx.response.body = {};
     ctx.response.type = 'txt';
-    console.log(ctx.response);
     next();
   })
 
