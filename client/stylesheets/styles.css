@@ -1,6 +1,23 @@
+@font-face {
+  font-family: 'Star Jedi';
+  src: url('/fonts/StarJedi.eot');
+  src: url('/fonts/StarJedi.eot?#iefix') format('embedded-opentype'),
+      url('/fonts/StarJedi.woff2') format('woff2'),
+      url('/fonts/StarJedi.woff') format('woff'),
+      url('/fonts/StarJedi.ttf') format('truetype'),
+      url('/fonts/StarJedi.svg#StarJedi') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 
 body {
+  background-position: center;
+  background-attachment: fixed;
+  /* background-size: cover; */
   background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
+  font-family: 'Star Jedi';
 }
 
 input:focus {
@@ -16,7 +33,7 @@ input:focus {
 h1 {
   color: yellow;
   text-align: center;
-  font-size: 6vw;
+  font-size: 4.5vw;
   padding: 10px;
   margin-bottom: 10px;
 }
@@ -175,6 +192,9 @@ h1 {
   height: 5vw;
   border-radius: 50%;
   /* background-color: black; */
+  background-position: center;
+  background-attachment: fixed;
+  /* background-size: cover; */
   background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
 
   color: white;
@@ -317,7 +337,7 @@ h1 {
   /* border: 1px solid green; */
   transform: rotate(-90deg);
   font-size: 2vw;
-  height: 3vw;
+  height: 2vw;
   width: 14vw;
   text-shadow: 0 0 5px white;
   text-align: center;
@@ -333,7 +353,7 @@ h1 {
 }
 
 .x-label p {
-  margin-bottom: 4vw;
+  margin-bottom: 3vw;
   background-image: radial-gradient(black, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
   border-radius: 40%;
   font-weight: bold;
@@ -526,6 +546,9 @@ h1 {
   box-shadow: 0 0 3px white;
   /* background-color: rgba(255, 255, 255, 0.902); */
   /* background-image: radial-gradient(white, rgba(255, 255, 255, 0.2)); */
+  background-position: center;
+  background-attachment: fixed;
+  /* background-size: cover; */
   background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
   color: white;
   box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.1);
@@ -566,3 +589,5 @@ h1 {
   width: 100%;
   text-align: center;
 }
+
+/* https://pbs.twimg.com/media/CcoloGvW4AArVcK.jpg */

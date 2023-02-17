@@ -24,9 +24,9 @@ const Bar = (props: any) => {
         Time
       </div>
       <div className="x-label">
-        <p>{ max }</p>
-        <p>{ Math.floor((max * 2) / 3 )}</p>
-        <p>{ Math.floor((max / 3))}</p>
+        <p>{ Math.ceil(max / 10) * 10 }</p>
+        <p>{ Math.ceil(((max * 2) / 30) ) * 10}</p>
+        <p>{ Math.ceil((max / 30)) * 10}</p>
       </div>
       
     </div>

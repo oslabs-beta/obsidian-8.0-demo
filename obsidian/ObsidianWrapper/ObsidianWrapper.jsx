@@ -193,6 +193,7 @@ function ObsidianWrapper(props) {
         // copy-paste mutate logic from 4.
 
         // use cache.write instead of cache.writeThrough
+        console.log(endpoint);
         const responseObj = await fetch(endpoint, {
           method: 'POST',
           headers: {

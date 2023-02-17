@@ -1,6 +1,6 @@
 import { React } from "../../deps/deps.client.ts";
 // import images from "../images.c-3po.jpg"
-import imageURL from "../photo.json"
+import imageURL from "../target.json"
 
 const CharacterCards = (props) => {
   console.log(props)

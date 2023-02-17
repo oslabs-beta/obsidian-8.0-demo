@@ -12,6 +12,8 @@ import {
 
 import { resolvers } from "./models/resolvers.ts";
 import { typeDefs } from "./models/typedefs.ts";
+import { writeJson, writeJsonSync } from 'https://deno.land/x/jsonfile/mod.ts';
+import { readJson, readJsonSync } from 'https://deno.land/x/jsonfile/mod.ts';
 
 const PORT = Number(Deno.env.get("PORT"));
 
@@ -64,13 +66,45 @@ const index = new TextDecoder().decode(output.outputFiles[0].contents);
 // Setup server.
 const app = new Application();
 
-const router = new Router().all('/graphql', handleGraphQL)
+const router = new Router();
 
-router.get('/:path+', async (ctx) => {
+router.all('/graphql', handleGraphQL);
+
+router.get('/fonts/:path+', async (ctx) => {
+  /*const data = await Deno.readFile(Deno.cwd() + '/client' + ctx.request.url.pathname);
+  const font = new Font(data);*/
   await send(ctx, ctx.request.url.pathname, {
+    root: Deno.cwd() + '/client',
+  });
+});
+
+router.get('/styles.css', async (ctx) => {
+  await send(ctx, 'styles.css', {
     root: Deno.cwd() + '/client/stylesheets',
   });
 });
+
+router.post('/:path+', async (ctx, next) => {
+  // writeJsonSync('../target.json', {ctx.response.body.name}, {append: true});
+    console.log('in the back end')
+    const data = await ctx.request.body().value;
+    //console.log(data.name)
+    //console.log(data.url)
+    const charName = data.name;
+    const url = data.url
+    console.log(data.json)
+    const json = {}
+    // const json: any = readJsonSync('./client/target.json')
+    console.log(json)
+    json[charName] = url;
+    const newJson = writeJsonSync('./client/target.json', json);
+    // console.log(await ctx.request.body().value.url);
+    //console.log(ctx.request);
+    ctx.response.body = {};
+    ctx.response.type = 'txt';
+    console.log(ctx.response);
+    next();
+  })
 
 app.use(router.routes(), router.allowedMethods());
 
@@ -81,7 +115,8 @@ app.use((ctx) => {
     <html>
       <head>
         <title>Obsidian Demo</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles.css" type="text/css">
+        <link href="https://fonts.cdnfonts.com/css/star-wars" rel="stylesheet">
       </head>
       <body>
         <div id="root" />

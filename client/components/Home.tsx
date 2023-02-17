@@ -2,12 +2,13 @@ import { reset } from "https://deno.land/std@0.152.0/fmt/colors";
 import { useEffect } from "https://esm.sh/v106/@types/react@18.0.27/X-ZC9yZWFjdEAxOC4yLjA/index";
 import { React, useObsidian, BrowserCache, LFUCache } from "../../deps/deps.client.ts";
 import Bar from "./Bar.tsx";
-import imageURL from "../photo.json"
+import imageURL from "../target.json"
 
 
 
 import InputField from "./InputField.tsx";
 import  CharacterCards  from "./CharacterCards.tsx"
+import { templateStringToQuery } from "https://deno.land/x/postgres@v0.14.2/query/query";
 /*
 deno install -qAf --unstable https://deno.land/x/denon/denon.ts
 export PATH="/Users/mattweisker/.deno/bin:$PATH"
@@ -26,7 +27,7 @@ const Home = () => {
 
 
   // const [addContent, setAddContent] = React.useState({name: '', mass: '', hair: '', skin: '', eye: '', gender: '', height: ''})
-  const [addContent, setAddContent] = React.useState({name: 'Mike Landswimmer', mass: '420', hair: 'Obsidian', skin: 'Obsidian', eye: 'Obsidian', gender: 'Flexible', height: 10, url: ''})
+  const [addContent, setAddContent] = React.useState({name: 'Mike Landswimmer', mass: '10', hair: 'Obsidian', skin: 'Obsidian', eye: 'Obsidian', gender: 'Flexible', height: 10, url: 'https://pbs.twimg.com/media/CcoloGvW4AArVcK.jpg'})
 
 
   const [callData, setCallData] = React.useState({});
@@ -151,16 +152,30 @@ const addCharacterButton = () => {
     setAddForm(true);
     setSearchInputDisplay(false);
     setGetAllDisplay(false);
+    console.log('finished mutating 1')
   } 
   else {
+    console.log('finsished mutating 2')
     mutate(queryStrAddCharacter)
     .then(resp => {
+      console.log('response ', resp)
       const data = [resp.data.addPerson]
       setPeople(data);
       setAddForm(false);
       setCurrentQuery('');
-      imageURL[addContent.name] = addContent.url
-    })
+      // imageURL[addContent.name] = addContent.url
+      console.log('finished mutating 3')
+    });
+    console.log('finished mutating')
+    if (addContent.url !== '') {
+      fetch('/imageURL', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: addContent.name, url: addContent.url, json: imageURL })
+      })
+      // .then(resp => resp.json())
+      console.log('finished posting')
+    }
   }
 }
 
@@ -181,6 +196,8 @@ const getAllCharacters = (
           dataCopy[query].push(resp.time)
           setCallData(dataCopy)
           setGetAllDisplay(false)
+          console.log('look here ', resp.data.allPeople)
+          console.log((resp.data.allPeople).length)
         })
       }}
       >All</button>
