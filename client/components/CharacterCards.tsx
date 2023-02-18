@@ -1,17 +1,14 @@
 import { React } from "../../deps/deps.client.ts";
-// import images from "../images.c-3po.jpg"
 import imageURL from "../target.json"
 
-const CharacterCards = (props) => {
+const CharacterCards = (props: any) => {
   console.log(props)
   const {char} = props;
-  let photo;
+  let photo = imageURL["unknown"];
   if (imageURL[char.name]) photo = imageURL[char.name];
-  else photo = imageURL["unknown"]
    return(
   <div className="character-card">
     <div className="left-container">
-      {/* <img className="test-image" src="https://images.bauerhosting.com/legacy/empire-images/features/560ebc7b50e6c513721c309f/Ben%20Kenobi.jpg?q=80&w=1800&ar=16:9&fit=crop&crop=top"/> */}
       <div className="img-div">
         <img className="character-image" src={photo}/>
       </div>

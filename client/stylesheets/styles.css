@@ -201,6 +201,7 @@ h1 {
   animation: expand-horizontal 0.4s ease-in;
   width: 50vw;
   border-radius: 20%;
+  /* border-radius: 30px; */
 }
 
 .character-search {
@@ -237,6 +238,7 @@ h1 {
   padding: 5px;
   border: 1px solid black;
   border-radius: 30%;
+  /* border-radius: 10px; */
   text-align: center;
 
 }
