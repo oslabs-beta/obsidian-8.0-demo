@@ -7,26 +7,19 @@ const cacheContext = React.createContext();
 
 function ObsidianWrapper(props) {
   const [cache, setCache] = React.useState(new LFUCache(2000));
-  // console.log('first ', cache)
-
   // You have to put your Google Chrome Obsidian developer tool extension id to connect Obsidian Wrapper with dev tool
   const chromeExtensionId = 'apcpdmmbhhephobnmnllbklplpaoiemo';
   // initialice cache in local storage
   window.localStorage.setItem('cache', JSON.stringify(cache));
 
   async function query(query, options = {}) {
-    // console.log('cache ', cache)
-    // console.log('query ', query)
     // dev tool messages
     const startTime = Date.now();
     /*chrome.runtime.sendMessage(chromeExtensionId, { query: query });
     chrome.runtime.sendMessage(chromeExtensionId, {
       cache: window.localStorage.getItem('cache'),
     });*/
-    // console.log(
-    //   "Here's the cache content: ",
-    //   window.localStorage.getItem('cache')
-    // );
+
     // set the options object default properties if not provided
     const {
       endpoint = '/graphql',
@@ -55,11 +48,8 @@ function ObsidianWrapper(props) {
       // when the developer decides to only utilize whole query for cache
       if (!wholeQuery) resObj = await cache.readWholeQuery(query);
       else resObj = await cache.read(query);
-      // console.log(resObj);
-      // console.log(query)
       // check if query is stored in cache
       if (resObj) {
-        // console.log('inside cache read using res obj ', resObj)
         // returning cached response as a promise
         const cacheHitResponseTime = Date.now() - startTime;
 
@@ -67,11 +57,7 @@ function ObsidianWrapper(props) {
         // const cacheCopy = {...cache};
         // cacheCopy.callTime = cacheHitResponseTime;
         // setCache(cacheCopy);
-        // console.log('backend cache ', cache)
-        // console.log('res obj ', resObj)
         resObj['time'] = cacheHitResponseTime
-        console.log('res obj after ', resObj)
-
 
         console.log(
           "From cacheRead: Here's the response time on the front end: ",
@@ -92,9 +78,7 @@ function ObsidianWrapper(props) {
 
     // when cache miss or on intervals
     async function hunt(query) {
-      // console.log('query1 ', query)
       if (wholeQuery) query = insertTypenames(query);
-      // console.log('query ', query)
       try {
         // send fetch request with query
         const resJSON = await fetch(endpoint, {
@@ -106,13 +90,10 @@ function ObsidianWrapper(props) {
           body: JSON.stringify({ query }),
         });
         const resObj = await resJSON.json();
-        console.log('hunt');
-        console.log(resObj);
-        // console.log('resObj ', resObj)
         const deepResObj = { ...resObj };
         // update result in cache if cacheWrite is set to true
         if (cacheWrite && resObj.data[Object.keys(resObj.data)[0]] !== null) {
-          if (!wholeQuery) console.log('test');//cache.writeWholeQuery(query, deepResObj);
+          if (!wholeQuery) cache.writeWholeQuery(query, deepResObj);
           else cache.write(query, deepResObj);
         }
         const cacheMissResponseTime = Date.now() - startTime;
@@ -144,7 +125,6 @@ function ObsidianWrapper(props) {
     // });
     const startTime = Date.now();
     mutation = insertTypenames(mutation);
-    console.log('typenames inserted ', mutation)
     const {
       endpoint = '/graphql',
       cacheWrite = true,
@@ -193,7 +173,6 @@ function ObsidianWrapper(props) {
         // copy-paste mutate logic from 4.
 
         // use cache.write instead of cache.writeThrough
-        console.log(endpoint);
         const responseObj = await fetch(endpoint, {
           method: 'POST',
           headers: {
@@ -202,7 +181,6 @@ function ObsidianWrapper(props) {
           },
           body: JSON.stringify({ query: mutation }),
         }).then((resp) => resp.json());
-        console.log('response ', responseObj)
         if (!cacheWrite) return responseObj;
         // first behaviour when delete cache is set to true
         if (toDelete) {

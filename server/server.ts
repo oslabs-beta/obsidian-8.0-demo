@@ -112,6 +112,9 @@ app.use((ctx) => {
         <title>Obsidian Demo</title>
         <link rel="stylesheet" href="styles.css" type="text/css">
         <link href="https://fonts.cdnfonts.com/css/star-wars" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Roboto:wght@300&display=swap" rel="stylesheet">
       </head>
       <body>
         <div id="root" />

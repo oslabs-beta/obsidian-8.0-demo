@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: 'Star Jedi';
   src: url('/fonts/StarJedi.eot');
   src: url('/fonts/StarJedi.eot?#iefix') format('embedded-opentype'),
@@ -9,7 +9,7 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap;
-}
+} */
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -71,6 +71,7 @@ input:focus {
   padding: 10px;
 } */
 h1 {
+  font-family: 'Star Wars', sans-serif;
   color: yellow;
   text-align: center;
   font-size: 4.5vw;
@@ -219,10 +220,11 @@ h1 {
 }
 
 #input-field p {
+  font-family: 'Roboto', sans-serif;
   text-align: center;
   font-size: 2.5vw;
   color: white;
-  text-shadow: 0 0 3px black;
+  text-shadow: 0 0 5px black;
   margin: 0;
 }
 
@@ -382,6 +384,7 @@ h1 {
   font-size: 2vw;
   color: yellow;
   text-shadow: 0 0 5px black;
+  font-family: 'Orbitron', sans-serif;
 
 }
 
@@ -545,6 +548,9 @@ h1 {
   align-items: start;
   justify-content: center;
 }
+/* .char-name-div p {
+
+} */
 .character-image {
   max-width: 8vw;
   max-height: 8vw;
@@ -553,7 +559,8 @@ h1 {
   box-shadow: 3px 3px 5px white;
 }
 .character-name {
-  font-size: 2vw;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5vw;
   color: white;
   font-weight: bold;
   text-shadow: 0 0 5px black;

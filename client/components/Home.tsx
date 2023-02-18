@@ -96,7 +96,6 @@ const Home = () => {
     newContent[key] = event.target.value
     if (key === 'height') newContent[key] = Number(event.target.value)
     setAddContent(newContent)
-    console.log(addContent)
   }
 
   // allows for the get all screen to only appear if the cursor is over the get all button
@@ -291,7 +290,7 @@ const addCharacter = (
   return (
     <div className="home-container">
       <div className="opening-crawl">
-        <h1>Who has the high ground?</h1>
+        <h1>Who has the high ground</h1>
       </div>
       
       <div className="mid-container">

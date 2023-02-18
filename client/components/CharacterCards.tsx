@@ -2,7 +2,6 @@ import { React } from "../../deps/deps.client.ts";
 import imageURL from "../target.json"
 
 const CharacterCards = (props: any) => {
-  console.log(props)
   const {char} = props;
   let photo = imageURL["unknown"];
   if (imageURL[char.name]) photo = imageURL[char.name];
