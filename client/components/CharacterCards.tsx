@@ -16,7 +16,7 @@ const CharacterCards = (props: any) => {
       </div>
         </div>
           <div className="right-container">
-            <div className="column-one">
+            <div className="column-one column">
               <div className="trait-box">
                 <p className="description">Height:</p>
                 <p className="column-item">{char.height}</p>
@@ -30,7 +30,7 @@ const CharacterCards = (props: any) => {
                 <p className="column-item">{char.eye_color}</p> 
               </div>
             </div>
-            <div className="column-two">
+            <div className="column-two column">
             <div className="trait-box">
               <p className="description">Weight:</p>
               <p className="column-item">{char.mass}</p>

@@ -94,6 +94,7 @@ function ObsidianWrapper(props) {
         // update result in cache if cacheWrite is set to true
         if (cacheWrite && resObj.data[Object.keys(resObj.data)[0]] !== null) {
           if (!wholeQuery) cache.writeWholeQuery(query, deepResObj);
+          else if(resObj.data[Object.keys(resObj.data)[0]].length > cache.capacity) console.log('Please increase cache capacity');
           else cache.write(query, deepResObj);
         }
         const cacheMissResponseTime = Date.now() - startTime;

@@ -218,7 +218,7 @@ const addCharacter = (
     <div className="input-no-button">
       <p>Add a character to the database</p>
       <form className="add-character-form">
-        <div id="add-input-row-1">
+        <div className="add-input-row">
 
           <div className="add-character-input">
             <label>Name</label>
@@ -241,7 +241,7 @@ const addCharacter = (
           </div>
 
         </div>
-        <div id="add-input-row-2">
+        <div className="add-input-row">
 
         <div className="add-character-input">
             <label>Hair-Color</label>
@@ -289,9 +289,8 @@ const addCharacter = (
 
   return (
     <div className="home-container">
-      <div className="opening-crawl">
-        <h1>Who has the high ground</h1>
-      </div>
+
+      <h1>the high ground</h1>
       
       <div className="mid-container">
         <div className="button-container">
