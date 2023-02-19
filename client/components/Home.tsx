@@ -25,8 +25,8 @@ const Home = () => {
   const [display, setDisplay] = React.useState({getAll: false, getOne: false, addOne: false})
 
   // Object holding all inputed add character data, uncomment second line for a default option
-  const [addContent, setAddContent] = React.useState({name: '', mass: '', hair: '', skin: '', eye: '', gender: '', height: ''})
-  // const [addContent, setAddContent] = React.useState({name: 'Mike Landswimmer', mass: '10', hair: 'Obsidian', skin: 'Obsidian', eye: 'Obsidian', gender: 'Flexible', height: 10, url: ''})
+  // const [addContent, setAddContent] = React.useState({name: '', mass: '', hair: '', skin: '', eye: '', gender: '', height: ''})
+  const [addContent, setAddContent] = React.useState({name: 'Mike Landswimmer', mass: '10', hair: 'Obsidian', skin: 'Obsidian', eye: 'Obsidian', gender: 'Flexible', height: 10, url: ''})
 
   // Holds data on response time to check if cache is working
   const [callData, setCallData] = React.useState({});
