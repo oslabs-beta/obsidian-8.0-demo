@@ -136,11 +136,6 @@ LRUCache.prototype.write = async function (queryStr, respObj, deleteFlag) {
       }
     }
   }
-<<<<<<< HEAD
-  console.log("this.nodehash after loop")
-  console.log(this.nodeHash)
-=======
->>>>>>> 7c0809132d8b84162c68677a57b869eb366c7d88
 };
 
 LRUCache.prototype.populateAllHashes = function (
