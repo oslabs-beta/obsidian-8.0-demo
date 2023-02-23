@@ -25,8 +25,8 @@ const Home = () => {
   const [display, setDisplay] = React.useState({getAll: false, getOne: false, addOne: false})
 
   // Object holding all inputed add character data, uncomment second line for a default option
-  // const [addContent, setAddContent] = React.useState({name: '', mass: '', hair: '', skin: '', eye: '', gender: '', height: ''})
-  const [addContent, setAddContent] = React.useState({name: 'Mike Landswimmer', mass: '10', hair: 'Obsidian', skin: 'Obsidian', eye: 'Obsidian', gender: 'Flexible', height: 10, url: ''})
+  const [addContent, setAddContent] = React.useState({name: '', mass: 'NA', hair: 'NA', skin: 'NA', eye: 'NA', gender: 'NA', height: 0, url: 'NA'})
+  // const [addContent, setAddContent] = React.useState({name: 'Mike Landswimmer', mass: '10', hair: 'Obsidian', skin: 'Obsidian', eye: 'Obsidian', gender: 'Flexible', height: 10, url: ''})
 
   // Holds data on response time to check if cache is working
   const [callData, setCallData] = React.useState({});
@@ -81,12 +81,6 @@ const Home = () => {
       height
     }
   }`
-
-  // function which takes in the event and the name of the state we're changing, 
-  // used to save input data into a state
-  const handleChange = (event: any, stateChange: any) => {
-    stateChange(event.target.value);
-  }
 
   // function which takes in the event and the key for adding content and updates state
   // checks for height key because height input must be a number
@@ -159,6 +153,8 @@ const addCharacterButton = () => {
   if (addContent.name !== "") {
     mutate(queryStrAddCharacter)
     .then(resp => {
+      console.log(resp);
+      if (resp.errors) return;
       const data = [resp.data.addPerson]
       setPeople(data);
       // Setting current querry to an empty string closes any existing graphs, because 
@@ -172,13 +168,13 @@ const addCharacterButton = () => {
     });
     // Checks if the new character was given an image url, if so it will send the character
     // name and url to the server.ts where they will add that info to target.json
-    if (addContent.url !== '') {
-      fetch('/imageURL', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: addContent.name, url: addContent.url, json: imageURL })
-      })
-    }
+    // if (addContent.url !== '') {
+    //   fetch('/imageURL', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ name: addContent.name, url: addContent.url, json: imageURL })
+    //   })
+    // }
   }
 }
 

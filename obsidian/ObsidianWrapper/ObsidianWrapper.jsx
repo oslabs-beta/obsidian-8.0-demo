@@ -1,6 +1,7 @@
 import * as React from "https://esm.sh/react@18";
 import BrowserCache from '../src/Browser/CacheClassBrowser.js';
 import LFUCache from '../src/Browser/lfuBrowserCache.js';
+import LRUCache from '../src/Browser/lruBrowserCache.js';
 import { insertTypenames } from '../src/Browser/insertTypenames.js';
 
 const cacheContext = React.createContext();
@@ -10,15 +11,17 @@ function ObsidianWrapper(props) {
   // You have to put your Google Chrome Obsidian developer tool extension id to connect Obsidian Wrapper with dev tool
   const chromeExtensionId = 'apcpdmmbhhephobnmnllbklplpaoiemo';
   // initialice cache in local storage
-  window.localStorage.setItem('cache', JSON.stringify(cache));
+  //window.localStorage.setItem('cache', JSON.stringify(cache));
 
   async function query(query, options = {}) {
     // dev tool messages
     const startTime = Date.now();
-    /*chrome.runtime.sendMessage(chromeExtensionId, { query: query });
-    chrome.runtime.sendMessage(chromeExtensionId, {
-      cache: window.localStorage.getItem('cache'),
-    });*/
+    /*
+      chrome.runtime.sendMessage(chromeExtensionId, { query: query });
+      chrome.runtime.sendMessage(chromeExtensionId, {
+        cache: window.localStorage.getItem('cache'),
+      });
+    */
 
     // set the options object default properties if not provided
     const {
