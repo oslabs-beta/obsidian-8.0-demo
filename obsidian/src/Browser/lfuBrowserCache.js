@@ -154,9 +154,10 @@ LFUCache.prototype.read = async function (queryStr) {
 
 LFUCache.prototype.write = async function (queryStr, respObj, deleteFlag) {
   let nullFlag = false;
+  let deleteMutation = "";
   for(const query in respObj.data) {
-    console.log(query);
-    if(respObj.data[query] === null) nullFlag = true;
+    if(respObj.data[query] === null) nullFlag = true
+    else if(query.toLowerCase().includes('delete')) deleteMutation = labelId(respObj.data[query]);
   }
   if(!nullFlag) {
     const queryObj = destructureQueries(queryStr);
@@ -165,7 +166,21 @@ LFUCache.prototype.write = async function (queryStr, respObj, deleteFlag) {
     for (const hash in resFromNormalize) {
       const resp = await this.get(hash);
       if (hash === "ROOT_QUERY" || hash === "ROOT_MUTATION") {
-        this[hash] = Object.assign(this[hash], resFromNormalize[hash]);
+        if(deleteMutation === "") {
+          this[hash] = Object.assign(this[hash], resFromNormalize[hash]);
+        } else {
+          const typeName = deleteMutation.slice(0, deleteMutation.indexOf('~'));
+          for(const key in this.ROOT_QUERY) {
+            if(key.includes(typeName + 's') || key.includes(plural(typeName))) {
+              for(let i = 0; i < this.ROOT_QUERY[key].length; i++) {
+                if(this.ROOT_QUERY[key][i] === deleteMutation) {
+                  this.ROOT_QUERY[key].splice(i, 1);
+                  i--;
+                }
+              }
+            }
+        }
+        }
       } else if (resFromNormalize[hash] === "DELETED") {
         // Should we delete directly or do we still need to flag as DELETED
         await this.put(hash, "DELETED");
@@ -184,6 +199,11 @@ LFUCache.prototype.write = async function (queryStr, respObj, deleteFlag) {
     }
   }
 };
+
+function labelId(obj) {
+  const id = obj.id || obj.ID || obj._id || obj._ID || obj.Id || obj._Id;
+  return obj.__typename + "~" + id;
+}
 
 LFUCache.prototype.cacheDelete = async function (hash) {
   let node = this.nodeHash.get(hash);
