@@ -11,32 +11,6 @@ class Node {
   }
 }
 
-// class DoublyLinkedList {
-//   constructor() {
-//     this.head = new Node('head', null);
-//     this.tail = new Node('tail', null);
-  
-//     this.head.next = this.tail;
-//     this.tail.prev = this.head;
-//   }
-
-//  removeNode = function (node) {
-//     const prev = node.prev;
-//     const next = node.next; 
-//     prev.next = next; 
-//     next.prev = prev;
-//   };
-  
-//   addNode = function (node) {
-//     const tempTail = this.tail.prev;
-//     tempTail.next = node;
-  
-//     this.tail.prev = node;
-//     node.next = this.tail;
-//     node.prev = tempTail;
-//   }
-// }
-
 export default function LRUCache(capacity) {
   this.capacity = capacity;
   this.currentSize = 0;
@@ -97,28 +71,21 @@ LRUCache.prototype.put = function (key, value) {
 }
 
 LRUCache.prototype.read = async function (queryStr) {
-  // console.log('root query ', queryStr)
-  // console.log('cache.read')
   if (typeof queryStr !== "string") throw TypeError("input should be a string");
   // destructure the query string into an object
   const queries = destructureQueries(queryStr).queries;
-  // console.log(queries)
   // breaks out of function if queryStr is a mutation
   if (!queries) return undefined;
   const responseObject = {};
   // iterate through each query in the input queries object
   for (const query in queries) {
     // get the entire str query from the name input query and arguments
-    // console.log('query ', queries[query])
     const queryHash = queries[query].name.concat(queries[query].arguments);
-    // console.log(queryHash)
     const rootQuery = this.ROOT_QUERY;
-    // console.log(rootQuery)
     // match in ROOT_QUERY
     if (rootQuery[queryHash]) {
       // get the hashs to populate from the existent query in the cache
       const arrayHashes = rootQuery[queryHash];
-      // console.log('array hashes ', arrayHashes)
       // Determines responseObject property labels - use alias if applicable, otherwise use name
       const respObjProp = queries[query].alias ?? queries[query].name;
       // invoke populateAllHashes and add data objects to the response object for each input query
@@ -126,7 +93,6 @@ LRUCache.prototype.read = async function (queryStr) {
         arrayHashes,
         queries[query].fields
       );
-      // console.log('response Object ', responseObject)
 
 
       if (!responseObject[respObjProp]) return undefined;
@@ -136,60 +102,51 @@ LRUCache.prototype.read = async function (queryStr) {
       return null;
     }
   }
-  // console.log('response Object ', responseObject)
-  console.log('read');
-  console.log(responseObject);
   return { data: responseObject };
 };
 
 LRUCache.prototype.write = async function (queryStr, respObj, deleteFlag) {
-  // console.log('root query ', this.ROOT_QUERY)
-  console.log('cache.write')
-  console.log('queryStr ', queryStr)
-  console.log('respObj ', respObj)
-
-  const queryObj = destructureQueries(queryStr);
-  console.log('queryObj post destructure ', queryObj)
-  // console.log('respObj ', respObj)
-  const resFromNormalize = normalizeResult(queryObj, respObj, deleteFlag);
-  console.log('resFromNormalize');
-  console.log(resFromNormalize);
-  // console.log('resFromNormalize ', resFromNormalize)
-  // update the original cache with same reference
-  // console.log('res ' ,resFromNormalize)
-  for (const hash in resFromNormalize) {
-    // console.log('hash ', hash)
-    const resp = await this.get(hash);
-    if (hash === "ROOT_QUERY" || hash === "ROOT_MUTATION") {
-      this[hash] = Object.assign(this[hash], resFromNormalize[hash]);
-    } else if (resFromNormalize[hash] === "DELETED") {
-      // Should we delete directly or do we still need to flag as DELETED
-      await this.put(hash, "DELETED");
-    } else if (resp) {
-      const newObj = Object.assign(resp, resFromNormalize[hash]);
-      await this.put(hash, newObj);
-    } else {
-      const typeName = hash.slice(0, hash.indexOf('~'));
-      console.log('hash in write')
-      console.log(hash);
-      console.log(resFromNormalize[hash]);
-      await this.put(hash, resFromNormalize[hash]);
-      for(const key in this.ROOT_QUERY) {
-        if(key.includes(typeName + 's') || key.includes(plural(typeName))) {
-          this.ROOT_QUERY[key].push(hash);
+  let nullFlag = false;
+  for(const query in respObj.data) {
+    console.log(query);
+    if(respObj.data[query] === null) nullFlag = true;
+  }
+  if(!nullFlag) {
+    const queryObj = destructureQueries(queryStr);
+    const resFromNormalize = normalizeResult(queryObj, respObj, deleteFlag);
+    // update the original cache with same reference
+    for (const hash in resFromNormalize) {
+      const resp = await this.get(hash);
+      if (hash === "ROOT_QUERY" || hash === "ROOT_MUTATION") {
+        this[hash] = Object.assign(this[hash], resFromNormalize[hash]);
+      } else if (resFromNormalize[hash] === "DELETED") {
+        // Should we delete directly or do we still need to flag as DELETED
+        await this.put(hash, "DELETED");
+      } else if (resp) {
+        const newObj = Object.assign(resp, resFromNormalize[hash]);
+        await this.put(hash, newObj);
+      } else {
+        const typeName = hash.slice(0, hash.indexOf('~'));
+        await this.put(hash, resFromNormalize[hash]);
+        for(const key in this.ROOT_QUERY) {
+          if(key.includes(typeName + 's') || key.includes(plural(typeName))) {
+            this.ROOT_QUERY[key].push(hash);
+          }
         }
       }
     }
   }
+<<<<<<< HEAD
   console.log("this.nodehash after loop")
   console.log(this.nodeHash)
+=======
+>>>>>>> 7c0809132d8b84162c68677a57b869eb366c7d88
 };
 
 LRUCache.prototype.populateAllHashes = function (
   allHashesFromQuery,
   fields
 ) {
-  // console.log('populate all hashes')
   if (!allHashesFromQuery.length) return [];
   const hyphenIdx = allHashesFromQuery[0].indexOf("~");
   const typeName = allHashesFromQuery[0].slice(0, hyphenIdx);
@@ -224,9 +181,5 @@ LRUCache.prototype.populateAllHashes = function (
     resolvedProm.push(dataObj);
     return resolvedProm;
   }, []);
-  // console.log('reduction ', reduction);
   return reduction;
 };
-
-
-// '' - 1 - 2 - 3 - ''

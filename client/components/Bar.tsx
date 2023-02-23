@@ -7,34 +7,35 @@ const Bar = (props: any) => {
 
   const { callData, currentQuery } = props
 
-  console.log('props ', props)
   let graph;
+  const colors = ['#2E67F8CC', '#EB212ECC', '#228B22CC']
 
-  const colors = ['crimson', 'forestgreen', 'dodgerblue']
-
+  // If there is a current query it will display the bar graph
   if (currentQuery !== '') {
+    // Find the highest number in our return time and establish the height based off of that number
     const max: number = Math.max(...callData[currentQuery])
-    const search = currentQuery;
     graph = <div className="bar-graph">
     <div className="bar-graph-title">
-      { search }
+      { currentQuery }
     </div>
     <div className="bar-graph-x-name">
       <div className="x-name">
         Time
       </div>
+      {/* Divide the heighest amount of time into thirds and round to the nearest tens place */}
       <div className="x-label">
-        <p>{ max }</p>
-        <p>{ Math.floor((max * 2) / 3 )}</p>
-        <p>{ Math.floor((max / 3))}</p>
+        <p>{ Math.ceil(max / 10) * 10 }</p>
+        <p>{ Math.ceil(((max * 2) / 30) ) * 10}</p>
+        <p>{ Math.ceil((max / 30)) * 10}</p>
       </div>
       
     </div>
     <div className="bar-graph-display">
-      {callData[search] && callData[search].map((time: number, i: number) => (
+      {/* Map through all of the time data and display a new column for each  */}
+      {callData[currentQuery] && callData[currentQuery].map((time: number, i: number) => (
         <div className="bar-column" >
           <p style={{"color": `${colors[i%3]}`}} >{time}</p>
-          <div className="bar-data" style={{"height": `${(time / max) * 100 }%`, "backgroundColor": `${colors[i % 3]}`, "border": `${colors[i % 3]}`}}>
+          <div className="bar-data" style={{"height": `${(time / max) * 100 }%`, "backgroundColor": `${colors[i % 3]}`}}>
           </div>
         </div>
       ))}
@@ -48,25 +49,7 @@ const Bar = (props: any) => {
 
     return (
         <div>
-            {/* <button onClick={() => {
-              setCurrentQuery('Search all characters')
-              setShow(true)
-              }}>Search all characters</button>
-            <button onClick={() => {
-              setCurrentQuery('Search for Yoda')
-              setShow(true)
-              }}>Search for Yoda</button>
-            <button onClick={() => {
-              setCurrentQuery('Search for Luke')
-              const currentData = {...data};
-              currentData['Search for Luke'].push(Math.floor(Math.random() * 1500))
-              setData(currentData)
-              setShow(true)
-              }}>Search for Luke</button> */}
-            <div>
-              { graph }
-            </div>
-
+            { graph }
         </div>
     )
 }

@@ -1,244 +1,54 @@
+/* @font-face {
+  font-family: 'Star Jedi';
+  src: url('/fonts/StarJedi.eot');
+  src: url('/fonts/StarJedi.eot?#iefix') format('embedded-opentype'),
+      url('/fonts/StarJedi.woff2') format('woff2'),
+      url('/fonts/StarJedi.woff') format('woff'),
+      url('/fonts/StarJedi.ttf') format('truetype'),
+      url('/fonts/StarJedi.svg#StarJedi') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+} */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-position: center;
+  background-attachment: fixed;
+  background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
+  width: 1.5vw;
+  animation: fade-in 0.5s ease-in;
+}
+
+::-webkit-scrollbar-thumb {
+  background-image: radial-gradient(black, white);
+  box-shadow: 0 0 5px white;
+  border-radius: 50%;
+  width: 1vw;
+  animation: fade-in 0.5s ease-in;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+
+@keyframes expand-horizontal {
+  from {width: 0px; background-color: white;}
+  to {width: 50vw;}
+}
+
+@keyframes fade-in {
+  from {opacity: 0; background-color: white;}
+  to {opacity: 1;}
+}
 
 body {
+  background-position: center;
+  background-attachment: fixed;
   background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
-
-}
-
-.opening-crawl {
-  display: flex;
-  justify-content: center;
-  border-radius: 10px;
-  font-size: 4vw;
-  padding: 10px;
-}
-.opening-crawl h1 {
-  color: yellow;
-  text-align: center;
-}
-
-.mid-container {
-  display: flex;
-  height: 40vh;
-}
-
-.button-container{
-  background-color: lightslategray;
-  margin-right: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  width: 50%;
-}
-
-.get-all-characters {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-}
-.get-all-characters button {
-  width: 30vh;
-  height: 10vh;
-  padding: 5px;
-  border-radius: 10px;
-}
-.search-characters {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-  /* border-top: 1px solid black;
-  border-bottom: 1px solid black; */
-}
-.search-characters input {
-  width: 8%;
-  border-radius: 10px;
-}
-.search-characters button {
-  width: 30vh;
-  height: 10vh;
-  padding: 5px;
-  /* margin-left: 15px; */
-  border-radius: 10px;
-}
-.add-character {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-}
-.add-character button {
-  width: 30vh;
-  height: 10vh;
-  padding: 5px;
-  border-radius: 10px;
-  background-color: rgb(248,248,248);
-}
-
-#input-field {
-  width: 50%;
-  background-color: lightslategray;
-  margin-left: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-#input-field div {
-  display: flex;
-  flex-direction: column;
-}
-
-#input-field div button {
-  width: 100%;
-}
-
-.add-character-form  {
-  display: flex;
-  justify-content: center;
-  margin: auto;
-  width: 70%;
-  flex-wrap: wrap;
-  padding: 5px;
-  min-width: 530px;
-}
-.add-character-input {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-}
-.add-character-input input {
-  width: 150px;
-  margin-left: 5px;
-}
-
-.character-title {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-}
-
-.total-search-chart {
-  /* min-height: 200px; */
-}
-
-.search-chart {
-  display: flex;
-  justify-content: space-between;
-  padding-left: 50px;
-  padding-right: 50px;
-  border-bottom: 2px solid white;
-  background-color: aliceblue;
-}
-.search-chart p {
-  display: flex;
-  justify-content: start;
-}
-.ten {
-  width: 15%;
-}
-.last-row {
-  width: 10%;
-}
-
-.bar-graph {
-  display: grid;
-  height: 90%;
-  width: 100%;
-  grid-template-columns: 75px auto;
-  grid-template-rows: 50px auto 50px;
-  padding: 10px;
-  background-color: lightslategray;
-  border-radius: 10px;
-}
-
-.bar-graph div {
-  text-align: center;
-}
-
-.bar-graph-title {
-  /* border: 1px solid red; */
-  grid-column-start: 1;
-  grid-column-end: 3;
-  font-size: 2vw;
-  color: yellow
-
-}
-
-.bar-graph-x-name {
-  /* border: 1px solid blue; */
-  /* writing-mode: sideways-lr; */
-  /* transform: rotate(-90deg); */
-  display: flex;
-  /* flex-direction: column; */
-  justify-content: center;
-  align-items: center;
-}
-
-.x-name {
-  /* border: 1px solid green; */
-  transform: rotate(-90deg);
-  font-size: 2vw;
-  height: 10px;
-}
-
-.x-label {
-  /* border: 1px solid orange; */
-  height: 100%;
-  font-size: 1vw;
-  color: white;
-  justify-content: space-between;
-}
-
-.x-label p {
-  margin-bottom: 50px;
-}
-
-.bar-graph-display {
-  /* border: 1px solid yellow; */
-  border: 3px white;
-  border-style: none none solid solid;
-  display: flex;
-  align-items: end;
-}
-
-.bar-graph-space {
-  /* border: 1px solid green; */
-
-}
-
-.bar-graph-y-name {
-  /* border: 1px solid purple; */
-  padding: 10px;
-  font-size: 2vw;
-
-}
-
-.bar-column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: end;
-  height: 100%;
-  width: 20%;
-  margin: 0 10px 0 10px;
-  /* border: 1px solid black; */
-
-}
-
-.bar-column p {
-  /* border: 1px solid black; */
-  margin: 0;
-}
-
-.bar-data {
-  /* height: 80%; */
-  width: 100%;
-  /* background-color: yellow; */
-  background-color: black;
-  border: 20px;
-  /* border: 1px black; */
-  border-style: solid solid none solid;
-  margin: none;
-  border-radius: 5px 5px 0 0;
 }
 
 .home-container {
@@ -246,80 +56,366 @@ body {
   flex-direction: column;
 }
 
-.character-container {
-  margin-left: 2.5%;
-  border-radius: 8px;
-  display:flex;
+input:focus {
+  outline: 2px solid black ! important;
+}
+
+h1 {
+  font-family: 'Star Wars', sans-serif;
+  color: yellow;
+  text-align: center;
+  font-size: 4.5vw;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.mid-container {
+  display: flex;
+  height: 25vw;
+  justify-content: center;
+}
+
+/* ////////       button option section      /////////*/
+.button-container{
+  margin-right: 1vw;
+  display: flex;
   flex-direction: column;
-  width: 42.5%;
-  height: 90%;
+  justify-content: space-evenly;
+  width: 20vw;
+}
+
+.button-container button {
+  width: 7vw;
+  height: 7vw;
+  padding: 5px;
+  border-radius: 50%;
+  background-size: 7vw;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: white;
+}
+
+.add-character button {
+  background-size: 5vw;
+}
+
+.button-container div {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+/* ////////       display card section      /////////*/
+
+#input-field {
+  width: 50vw;
+  margin-left: 1vw;
+  display: flex;
+  justify-content: center;
+}
+
+.search-all {
+  background-color: #2E67F8CC;
+}
+.search-one {
+  background-color: #EB212ECC;
+}
+.add-one {
+  background-color: #2FF924CC;
+}
+
+.input-field-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: expand-horizontal 0.4s ease-in;
+  width: 50vw;
+  border-radius: 20%;
+}
+
+.character-search {
+  margin-top: 5%;
+}
+
+.input-no-button {
+  height: 80%;
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-character-form label {
+  text-align: center;
+}
+
+.add-input-row {
+  display: flex;
+}
+
+.add-character-input {
+  display: flex;
+  flex-direction: column;
+  padding: 1vw;
+}
+
+.input-field-div p {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  font-size: 2.5vw;
+  color: white;
+  text-shadow: 0 0 5px black;
+  margin: 0;
+}
+
+.input-field-div label {
+  font-size: 1.5vw;
+  font-weight: bold;
+  text-shadow: 0 0 3px white;
+}
+
+.input-field-div input {
+  width: 10vw;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 30%;
+  text-align: center;
+}
+
+.input-field-div input:active {
+  border: 3px solid black;
+}
+
+.input-field-div button {
+  width: 5vw;
+  height: 5vw;
+  border-radius: 50%;
+  background-position: center;
+  background-attachment: fixed;
+  background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
+  color: white;
+  font-size: 1.5vw;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.input-field-div button:hover {
+  box-shadow: 0 0 20px white;
+}
+
+#death-star {
+  width: 23.5vw;
+  height: 23.5vw;
+  background-image: url("https://toppng.com//public/uploads/preview/the-death-star-star-wars-death-star-11562902961caqjz9dfv9.png");
+  background-size: 25vw;
+  border-radius: 50%;
+  background-position: center center;
+}
+
+/* ////////       character card section      /////////*/
+.response-container {
+  height: 25vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.character-container {
+  width: 42vw;
+  height: 20vw;
+  margin-right: 2.5vw;
   overflow-y: auto;
+
 }
 .character-card {
-  border: 2px solid rgb(10, 10, 10);
-  background-color: rgb(244, 244, 244);
-  border-radius: 8px;
+  background-color: #71797ECC;
+  border-radius: 18%;
   display: flex;
-  flex-direction: row;
-  margin-bottom: 12px;
+  margin-bottom: 2vw;
+  animation: fade-in 0.5s ease-in;
+
 }
 .left-container {
   display: flex;
-  flex: .75;
   flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  /* border: 1px solid lightblue; */
+  width: 10vw;
 }
-.test-image {
-  max-width: 80%;
-  border-radius: 10px;
-  margin-top: 15px; 
-}
-.character-name {
 
-  font-size: 34px;
+.img-div {
+  height: 10vw;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+
+.char-name-div {
+  height: 10vw;
+}
+
+.character-image {
+  max-width: 8vw;
+  max-height: 8vw;
+  border-radius: 10px;
+  box-shadow: 3px 3px 5px white;
+}
+
+.character-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5vw;
+  color: white;
+  text-shadow: 0 0 5px black;
+  text-align: center;
 }
 .right-container{
   display: flex;
   flex: 1;
-  /* border: 1px solid green; */
-}
-.column-one {
-  display:flex;
-  flex: 1;
-  /* border: 1px solid pink; */
-  flex-direction: column;
-  justify-content: space-around;
-  padding-left: 50px; 
-}
-.column-two {
-  display:flex;
-  flex: 1;
-  /* border: 1px solid blue; */
-  flex-direction: column;
-  justify-content: space-around;
-  padding-left: 50px;
-}
-.column-item {
-  border: 1px solid rgb(10, 10, 10);
-  border-radius: 5px;
-  padding: 5px;
-  width: fit-content;
-  font-size: 18px;
-}
-.column-item:hover {
-  background-color: rgb(252, 249, 215);
 }
 
-.response-container {
+.column {
+  display:flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.trait-box {
+  height: 33.3%;
   display: flex;
-  width: 100%;
-  height: 400px;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.trait-box p {
+  margin: 0;
+}
+.description {
+  font-size: 1.5vw;
+  font-weight: bold;
+  text-shadow: 0 0 5px white;
+  padding: 5px;
+
+}
+.column-item {
+  border-radius: 90%;
+  background-position: center;
+  background-attachment: fixed;
+  background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
+  color: white;
+  box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.1);
+  padding: 5px;
+  width: 75%;
+  height: 40%;
+  font-size: 2vw;
+  text-align: center;
+}
+.column-item:hover {
+  background-image: none;
+  background-color: rgb(252, 249, 215);
+  color: black;
+}
+
+
+/* ////////       bar graph section      /////////*/
+.bar-graph {
+  display: grid;
+  height: 20vw;
+  width: 42vw;
+  margin-left: 2.5vw;
+  grid-template-columns: 5vw 1fr;
+  grid-template-rows: 3vw 14vw 2vw;
+  padding: 0.5;
+  background-color: #71797ECC;
+  border-radius: 18%;
+  animation: fade-in 0.5s ease-in;
+}
+
+.bar-graph div {
+  text-align: center;
+}
+
+.bar-graph-title {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  font-size: 2vw;
+  color: yellow;
+  text-shadow: 0 0 5px black;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.bar-graph-x-name {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
-.graph-container {
-  width: 40%;
+.x-name {
+  transform: rotate(-90deg);
+  font-size: 2vw;
+  height: 1.5vw;
+  text-shadow: 0 0 5px white;
+}
+
+.x-label {
+  font-size: 1vw;
+  color: white;
+  margin-right: 10px;
+}
+
+.x-label p {
+  margin-bottom: 3vw;
+  background-image: radial-gradient(black, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+  border-radius: 40%;
+  padding: 1px 3px;
+}
+
+.bar-graph-display {
+  border: 3px white;
+  border-style: none none solid solid;
+  display: flex;
+}
+
+.bar-graph-y-name {
+  padding: 0.2vw;
+  font-size: 2vw;
+  text-shadow: 0 0 5px white;
+}
+
+.bar-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  width: 18%;
+  margin: 0 0 0 10px;
+}
+
+.bar-column p {
+  background-image: radial-gradient(white, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2));
+  box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.2);
+  border-radius: 40%;
+  font-weight: bold;
+  font-size: 1.5vw;
+  padding: 1px 3px;
+  margin: 0;
+}
+
+.bar-data {
+  width: 100%;
+  border-radius: 5% 5% 0 0;
+  margin-top: 2px;
+  border: 1px black;
+  border-style: solid solid none solid;
+}
+
+.bar-data:hover {
+  border: 2px white;
+  border-style: groove groove none groove;
+  box-shadow: 0 0 5px white;
+}
+
+.footer {
+  color: yellow;
+  width: 100%;
+  text-align: center;
 }

@@ -12,6 +12,8 @@ import {
 
 import { resolvers } from "./models/resolvers.ts";
 import { typeDefs } from "./models/typedefs.ts";
+import { writeJson, writeJsonSync } from 'https://deno.land/x/jsonfile/mod.ts';
+import { readJson, readJsonSync } from 'https://deno.land/x/jsonfile/mod.ts';
 
 const PORT = Number(Deno.env.get("PORT"));
 
@@ -64,13 +66,40 @@ const index = new TextDecoder().decode(output.outputFiles[0].contents);
 // Setup server.
 const app = new Application();
 
-const router = new Router().all('/graphql', handleGraphQL)
+const router = new Router();
 
-router.get('/:path+', async (ctx) => {
+router.all('/graphql', handleGraphQL);
+
+router.get('/fonts/:path+', async (ctx) => {
+  /*const data = await Deno.readFile(Deno.cwd() + '/client' + ctx.request.url.pathname);
+  const font = new Font(data);*/
   await send(ctx, ctx.request.url.pathname, {
+    root: Deno.cwd() + '/client',
+  });
+});
+
+router.get('/styles.css', async (ctx) => {
+  await send(ctx, 'styles.css', {
     root: Deno.cwd() + '/client/stylesheets',
   });
 });
+
+router.post('/:path+', async (ctx, next) => {
+    const data = await ctx.request.body().value;
+    const charName = data.name;
+    const url = data.url
+    const json = data.json
+
+    // photo.json holds standard names and better format, keep as back up
+    // const json: any = readJsonSync('./client/photo.json')
+
+    json[charName] = url;
+    const newJson = writeJsonSync('./client/target.json', json);
+
+    ctx.response.body = {};
+    ctx.response.type = 'txt';
+    next();
+  })
 
 app.use(router.routes(), router.allowedMethods());
 
@@ -81,7 +110,11 @@ app.use((ctx) => {
     <html>
       <head>
         <title>Obsidian Demo</title>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles.css" type="text/css">
+        <link href="https://fonts.cdnfonts.com/css/star-wars" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Roboto:wght@300&display=swap" rel="stylesheet">
       </head>
       <body>
         <div id="root" />
