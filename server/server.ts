@@ -15,7 +15,8 @@ import { typeDefs } from "./models/typedefs.ts";
 import { writeJson, writeJsonSync } from 'https://deno.land/x/jsonfile/mod.ts';
 import { readJson, readJsonSync } from 'https://deno.land/x/jsonfile/mod.ts';
 
-const PORT = Number(Deno.env.get("PORT"));
+//const PORT = Number(Deno.env.get("PORT"));
+const PORT = 3000;
 
 const schema = makeExecutableSchema({ resolvers, typeDefs });
 

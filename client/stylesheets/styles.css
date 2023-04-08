@@ -36,13 +36,23 @@
 }
 
 @keyframes expand-horizontal {
-  from {width: 0px; background-color: white;}
-  to {width: 50vw;}
+  from {
+    width: 0px;
+    background-color: white;
+  }
+  to {
+    width: 50vw;
+  }
 }
 
 @keyframes fade-in {
-  from {opacity: 0; background-color: white;}
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+    background-color: white;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 body {
@@ -57,11 +67,11 @@ body {
 }
 
 input:focus {
-  outline: 2px solid black ! important;
+  outline: 2px solid black !important;
 }
 
 h1 {
-  font-family: 'Star Wars', sans-serif;
+  font-family: "Star Wars", sans-serif;
   color: yellow;
   text-align: center;
   font-size: 4.5vw;
@@ -76,7 +86,7 @@ h1 {
 }
 
 /* ////////       button option section      /////////*/
-.button-container{
+.button-container {
   margin-right: 1vw;
   display: flex;
   flex-direction: column;
@@ -115,13 +125,13 @@ h1 {
 }
 
 .search-all {
-  background-color: #2E67F8CC;
+  background-color: #2e67f8cc;
 }
 .search-one {
-  background-color: #EB212ECC;
+  background-color: #eb212ecc;
 }
 .add-one {
-  background-color: #2FF924CC;
+  background-color: #2ff924cc;
 }
 
 .input-field-div {
@@ -161,7 +171,7 @@ h1 {
 }
 
 .input-field-div p {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   text-align: center;
   font-size: 2.5vw;
   color: white;
@@ -226,15 +236,13 @@ h1 {
   height: 20vw;
   margin-right: 2.5vw;
   overflow-y: auto;
-
 }
 .character-card {
-  background-color: #71797ECC;
+  background-color: #71797ecc;
   border-radius: 18%;
   display: flex;
   margin-bottom: 2vw;
   animation: fade-in 0.5s ease-in;
-
 }
 .left-container {
   display: flex;
@@ -261,19 +269,19 @@ h1 {
 }
 
 .character-name {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
   font-size: 1.5vw;
   color: white;
   text-shadow: 0 0 5px black;
   text-align: center;
 }
-.right-container{
+.right-container {
   display: flex;
   flex: 1;
 }
 
 .column {
-  display:flex;
+  display: flex;
   flex: 1;
   flex-direction: column;
 }
@@ -294,7 +302,6 @@ h1 {
   font-weight: bold;
   text-shadow: 0 0 5px white;
   padding: 5px;
-
 }
 .column-item {
   border-radius: 90%;
@@ -315,7 +322,6 @@ h1 {
   color: black;
 }
 
-
 /* ////////       bar graph section      /////////*/
 .bar-graph {
   display: grid;
@@ -325,7 +331,7 @@ h1 {
   grid-template-columns: 5vw 1fr;
   grid-template-rows: 3vw 14vw 2vw;
   padding: 0.5;
-  background-color: #71797ECC;
+  background-color: #71797ecc;
   border-radius: 18%;
   animation: fade-in 0.5s ease-in;
 }
@@ -340,7 +346,7 @@ h1 {
   font-size: 2vw;
   color: yellow;
   text-shadow: 0 0 5px black;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
 }
 
 .bar-graph-x-name {
@@ -364,7 +370,11 @@ h1 {
 
 .x-label p {
   margin-bottom: 3vw;
-  background-image: radial-gradient(black, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2));
+  background-image: radial-gradient(
+    black,
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.2)
+  );
   border-radius: 40%;
   padding: 1px 3px;
 }
@@ -391,7 +401,11 @@ h1 {
 }
 
 .bar-column p {
-  background-image: radial-gradient(white, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2));
+  background-image: radial-gradient(
+    white,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.2)
+  );
   box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.2);
   border-radius: 40%;
   font-weight: bold;
