@@ -21,12 +21,13 @@ export PATH="/Users/mattweisker/.deno/bin:$PATH"
 const Home = () => {
   //array with id:Name (e.g. hair_color:Hair-Color)
   const fields = [
-    { field: "mass", name: "Mass" },
-    { field: "hair_color", name: "Hair-Color" },
-    { field: "skin_color", name: "Skin-Color" },
-    { field: "eye_color", name: "Eye-Color" },
-    { field: "gender", name: "Gender" },
     { field: "height", name: "Height" },
+    { field: "hair_color", name: "Hair" },
+    { field: "eye_color", name: "Eyes" },
+
+    { field: "mass", name: "Weight" },
+    { field: "skin_color", name: "Skin" },
+    { field: "gender", name: "Gender" },
   ];
 
   // From Obsidian Wrapper, takes our query and sends it to either database or cache
@@ -250,6 +251,14 @@ const Home = () => {
       <div className="input-no-button">
         <p>Get a list of all characters in the database</p>
       </div>
+      <button
+        className="search"
+        onClick={() => {
+          getAllButton();
+        }}
+      >
+        Search
+      </button>
       <ul className="fieldsList">
         {fields.map(({ field, name }, index) => {
           return (
@@ -268,13 +277,6 @@ const Home = () => {
         })}
       </ul>
       <button onClick={() => handleCheck(-1, true)}> Select All </button>
-      <button
-        onClick={() => {
-          getAllButton();
-        }}
-      >
-        All
-      </button>
     </div>
   );
 
@@ -288,6 +290,14 @@ const Home = () => {
           type="text"
           onChange={(e) => handleNewChar(e, "name")}
         ></input>
+        <button
+          onClick={() => {
+            searchOneCharButton();
+          }}
+          placeholder="Search by character name"
+        >
+          Search
+        </button>
       </div>
       <ul className="fieldsList">
         {fields.map(({ field, name }, index) => {
@@ -307,14 +317,6 @@ const Home = () => {
         })}
       </ul>
       <button onClick={() => handleCheck(-1, true)}> Select All </button>
-      <button
-        onClick={() => {
-          searchOneCharButton();
-        }}
-        placeholder="Search by character name"
-      >
-        One
-      </button>
     </div>
   );
 

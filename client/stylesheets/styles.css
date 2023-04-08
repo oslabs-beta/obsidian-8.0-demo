@@ -18,7 +18,9 @@
 ::-webkit-scrollbar-track {
   background-position: center;
   background-attachment: fixed;
-  background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
+  background-image: url(https://i.ibb.co/Qp3Ss8v/pexels-jakub-novacek-924824.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
   width: 1.5vw;
   animation: fade-in 0.5s ease-in;
 }
@@ -58,7 +60,9 @@
 body {
   background-position: center;
   background-attachment: fixed;
-  background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
+  background-image: url(https://i.ibb.co/Qp3Ss8v/pexels-jakub-novacek-924824.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .home-container {
@@ -81,7 +85,7 @@ h1 {
 
 .mid-container {
   display: flex;
-  height: 25vw;
+  height: 28vw;
   justify-content: center;
 }
 
@@ -121,17 +125,17 @@ h1 {
   width: 50vw;
   margin-left: 1vw;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
 }
 
 .search-all {
-  background-color: #2e67f8cc;
+  background-color: rgba(245, 245, 245, 0.75);
 }
 .search-one {
-  background-color: #eb212ecc;
+  background-color: rgba(245, 245, 245, 0.75);
 }
 .add-one {
-  background-color: #2ff924cc;
+  background-color: rgba(245, 245, 245, 0.75);
 }
 
 .input-field-div {
@@ -140,20 +144,25 @@ h1 {
   align-items: center;
   animation: expand-horizontal 0.4s ease-in;
   width: 50vw;
-  border-radius: 20%;
+  border-radius: 45px;
 }
 
 .character-search {
-  margin-top: 5%;
+  margin-top: 2.5%;
+  border-radius: 10px;
+  margin-bottom: 2.5%;
+  padding: 0.5%;
+  font-size: 1vw;
 }
 
 .input-no-button {
-  height: 80%;
   width: 40vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
 }
 
 .add-character-form label {
@@ -170,26 +179,36 @@ h1 {
   padding: 1vw;
 }
 
+.add-character-input label {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.add-character-input input {
+  border-radius: 0.5vw;
+  padding: 0.5vw;
+  font-size: 1vw;
+}
+
 .input-field-div p {
   font-family: "Roboto", sans-serif;
   text-align: center;
   font-size: 2.5vw;
-  color: white;
-  text-shadow: 0 0 5px black;
+  color: #080357;
+  text-shadow: 0 0 2px #080357;
   margin: 0;
 }
 
 .input-field-div label {
   font-size: 1.5vw;
   font-weight: bold;
-  text-shadow: 0 0 3px white;
+  text-shadow: 0 0 4px white;
 }
 
 .input-field-div input {
   width: 10vw;
-  padding: 5px;
+  padding: 0.4vw;
   border: 1px solid black;
-  border-radius: 30%;
+  /* border-radius: 30%; */
   text-align: center;
 }
 
@@ -197,21 +216,30 @@ h1 {
   border: 3px solid black;
 }
 
-.input-field-div button {
-  width: 5vw;
-  height: 5vw;
-  border-radius: 50%;
+.input-field-div button,
+.search {
+  width: 40%;
+  height: 5vh;
+  /* border-radius: 50%; */
   background-position: center;
   background-attachment: fixed;
-  background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
+  background-image: url(https://i.ibb.co/Qp3Ss8v/pexels-jakub-novacek-924824.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
   color: white;
-  font-size: 1.5vw;
+  font-size: 1.3vw;
   font-weight: bold;
-  margin-bottom: 10px;
+  cursor: pointer;
+  border-style: none;
+  border-radius: 10px;
 }
 
 .input-field-div button:hover {
-  box-shadow: 0 0 20px white;
+  box-shadow: 0 0 1vw slategray;
+}
+
+ul {
+  list-style-type: none;
 }
 
 #death-star {
@@ -238,8 +266,10 @@ h1 {
   overflow-y: auto;
 }
 .character-card {
+  padding: 1vw;
+  width: 39vw;
   background-color: #71797ecc;
-  border-radius: 18%;
+  border-radius: 2vw;
   display: flex;
   margin-bottom: 2vw;
   animation: fade-in 0.5s ease-in;
@@ -276,6 +306,7 @@ h1 {
   text-align: center;
 }
 .right-container {
+  margin-right: auto;
   display: flex;
   flex: 1;
 }
@@ -287,6 +318,7 @@ h1 {
 }
 
 .trait-box {
+  word-wrap: break-word;
   height: 33.3%;
   display: flex;
   flex-direction: column;
@@ -304,16 +336,23 @@ h1 {
   padding: 5px;
 }
 .column-item {
-  border-radius: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Orbitron", sans-serif;
+  max-width: 10vw;
+  border-radius: 2vw;
   background-position: center;
   background-attachment: fixed;
-  background-image: url(https://mcdn.wallpapersafari.com/medium/1/97/co341S.jpg);
+  background-image: url(https://i.ibb.co/Qp3Ss8v/pexels-jakub-novacek-924824.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
   color: white;
   box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.1);
   padding: 5px;
   width: 75%;
   height: 40%;
-  font-size: 2vw;
+  font-size: 1vw;
   text-align: center;
 }
 .column-item:hover {
@@ -332,7 +371,7 @@ h1 {
   grid-template-rows: 3vw 14vw 2vw;
   padding: 0.5;
   background-color: #71797ecc;
-  border-radius: 18%;
+  border-radius: 2vw;
   animation: fade-in 0.5s ease-in;
 }
 
@@ -416,7 +455,7 @@ h1 {
 
 .bar-data {
   width: 100%;
-  border-radius: 5% 5% 0 0;
+  border-radius: 0 0 0 0;
   margin-top: 2px;
   border: 1px black;
   border-style: solid solid none solid;
@@ -432,4 +471,28 @@ h1 {
   color: yellow;
   width: 100%;
   text-align: center;
+}
+
+.fieldsList {
+  columns: 2;
+  font-size: 1.5vw;
+}
+
+.field input {
+  height: 2.5vh;
+  width: 2.5vw;
+  background-color: #eee;
+}
+
+.field input:hover {
+  cursor: pointer;
+}
+
+.field label {
+  font-size: 1.5vw;
+  font-family: Arial, sans-serif;
+}
+
+.fieldsList li:not(:last-child) {
+  margin-bottom: 0.25vh;
 }
