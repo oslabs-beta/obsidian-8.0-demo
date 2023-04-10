@@ -16,4 +16,6 @@ deno task start
 
 (It's configured to start on localhost:3000)
 
-## Connecting with Obsidian Dev Tools
+## Connecting with Obsidian Developer Tool 8.0
+
+Check out the Obsidian Developer Tool [here](https://github.com/open-source-labs/obsidian-developer-tool)!
