@@ -1,4 +1,8 @@
-# Obsidian-8.0-Demo
+# Obsidian 8.0 Demo
+
+## Getting Started
+
+Install the latest version of Deno [here](https://deno.land/manual@v1.32.3/getting_started/installation)
 
 Clone this repository:
 
@@ -6,15 +10,31 @@ Clone this repository:
 git clone https://github.com/oslabs-beta/obsidian-8.0-demo.git
 ```
 
-Install the latest version of Deno [here](https://deno.land/manual@v1.32.3/getting_started/installation)
+### Setting up a ElephantSQL database
 
-Scripts to start the demo:
+Go to [ElephantSQL](https://www.elephantsql.com/), create an account and a new database instance. Name your database 'starwars' and select the free tier ('Tiny Turtle').
+
+Get the URL of the newly created database. 
+
+From within the root directory run `psql -d <YOUR_ELEPHANTSQL_URL_HERE> -f ObsidianDemoDatabasePlain.sql` in the terminal. Be sure to replace `<YOUR_ELEPHANTSQL_URL_HERE>` with your newly created elephantSQL url. This command will create tables in your database and populate the tables with rows of data that will be used for the demo. 
+
+
+### Setting up your .env file
+
+Create a .env file in the root folder and input the following:
+
+```javascript
+PORT= //insert port of your choice (ex. 3000)
+DATABASE_URI= //insert your postgresql URL here
+REDIS_HOST= //insert host address (ex. '127.0.0.1')
+```
+
+### Running the demo
+Run the script below to start the demo:
 
 ```javascript
 deno task start
 ```
-
-(It's configured to start on localhost:3000)
 
 ## Connecting with Obsidian Developer Tool 8.0
 
