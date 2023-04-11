@@ -16,6 +16,8 @@ Go to [ElephantSQL](https://www.elephantsql.com/), create an account and a new d
 
 Get the URL of the newly created database. 
 
+Make sure you have PostgresQL installed (run `psql --version` to check).
+
 From within the root directory run `psql -d <YOUR_ELEPHANTSQL_URL_HERE> -f ObsidianDemoDatabasePlain.sql` in the terminal. Be sure to replace `<YOUR_ELEPHANTSQL_URL_HERE>` with your newly created elephantSQL url. This command will create tables in your database and populate the tables with rows of data that will be used for the demo. 
 
 
@@ -25,7 +27,7 @@ Create a .env file in the root folder and input the following:
 
 ```javascript
 PORT= //insert port of your choice (ex. 3000)
-DATABASE_URI= //insert your postgresql URL here
+DATABASE_URL= //insert your postgresql URL here
 REDIS_HOST= //insert host address (ex. '127.0.0.1')
 ```
 
