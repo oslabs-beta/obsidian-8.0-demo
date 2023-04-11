@@ -3,7 +3,7 @@ import { dotenv as _dotenv, postgres } from '../../deps/deps.server.ts';
 const connect = async () => {
   // Get the connection string from the environment variable "DATABASE_URL"
   //const databaseUrl = Deno.env.get("DATABASE_URL")!;
-  const databaseUrl = 'postgres://bopoqipu:Sc1CIVO-EAvQ2eVS3mFTar_7e0lgcKZC@kashin.db.elephantsql.com/bopoqipu';
+  const databaseUrl = Deno.env.get("DATABASE_URL")!;
 
   // Create a database pool with three connections that are lazily established
   const pool = new postgres.Pool(databaseUrl, 1, true);

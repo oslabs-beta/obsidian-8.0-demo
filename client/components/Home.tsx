@@ -137,7 +137,6 @@ const Home = () => {
       else return index === pos ? !field : field;
     });
     setChecked(newChecked);
-    console.log(checked);
   };
   //generate query body based on checked checkboxes
   const generateQueryBody = () => {

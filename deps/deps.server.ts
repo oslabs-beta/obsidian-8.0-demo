@@ -13,6 +13,7 @@ import { Buffer } from "https://deno.land/std@0.139.0/node/buffer.ts";
 
 import * as postgres from "https://deno.land/x/postgres@v0.14.2/mod.ts";
 import { gql } from "https://deno.land/x/graphql_tag@0.0.1/mod.ts";
+import { ObsidianRouter } from "../obsidian-8.0/mod.ts";
 
 
 export { 
@@ -27,4 +28,5 @@ export {
   Buffer,
   postgres,
   gql,
+  ObsidianRouter
 };

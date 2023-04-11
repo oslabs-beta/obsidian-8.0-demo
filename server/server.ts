@@ -7,16 +7,14 @@ import {
   dotenv as _dotenv,
   GraphQLHTTP,
   makeExecutableSchema,
-  Buffer
+  Buffer,
+  ObsidianRouter
 } from "../deps/deps.server.ts";
 
 import { resolvers } from "./models/resolvers.ts";
 import { typeDefs } from "./models/typedefs.ts";
-import { writeJson, writeJsonSync } from 'https://deno.land/x/jsonfile/mod.ts';
-import { readJson, readJsonSync } from 'https://deno.land/x/jsonfile/mod.ts';
 
-//const PORT = Number(Deno.env.get("PORT"));
-const PORT = 3000;
+const PORT = Number(Deno.env.get("PORT"));
 
 const schema = makeExecutableSchema({ resolvers, typeDefs });
 
@@ -25,27 +23,6 @@ const resolve = GraphQLHTTP({
   graphiql: true,
   context: (request) => ({ request }),
 });
-
-const handleGraphQL = async (ctx: any) => {
-  // cast Oak request into a normal Request
-  const req = new Request(ctx.request.url.toString(), {
-    body: JSON.stringify(await ctx.request.body().value),
-    headers: ctx.request.headers,
-    method: ctx.request.method,
-  })
-
-  const res = await resolve(req)
-  const chunks = [];
-
-  for await (const chunk of res.body!) {
-    chunks.push(chunk);
-  }
-
-  for (const [k, v] of res.headers.entries()) ctx.response.headers.append(k, v);
-
-  ctx.response.status = res.status;
-  ctx.response.body = Buffer.concat(chunks).toString();
-};
 
 // Transpile jsx to js for React.
 await esbuild.initialize({
@@ -69,8 +46,6 @@ const app = new Application();
 
 const router = new Router();
 
-router.all('/graphql', handleGraphQL);
-
 router.get('/fonts/:path+', async (ctx) => {
   /*const data = await Deno.readFile(Deno.cwd() + '/client' + ctx.request.url.pathname);
   const font = new Font(data);*/
@@ -85,24 +60,20 @@ router.get('/styles.css', async (ctx) => {
   });
 });
 
-router.post('/:path+', async (ctx, next) => {
-    const data = await ctx.request.body().value;
-    const charName = data.name;
-    const url = data.url
-    const json = data.json
+interface ObsRouter extends Router{
+  obsidianSchema?: any;
+};
 
-    // photo.json holds standard names and better format, keep as back up
-    // const json: any = readJsonSync('./client/photo.json')
+const GraphQLRouter = await ObsidianRouter<ObsRouter>({
+  Router,
+  typeDefs: typeDefs,
+  resolvers: resolvers,
+  useCache: false,
+});
 
-    json[charName] = url;
-    const newJson = writeJsonSync('./client/target.json', json);
-
-    ctx.response.body = {};
-    ctx.response.type = 'txt';
-    next();
-  })
 
 app.use(router.routes(), router.allowedMethods());
+app.use(GraphQLRouter.routes(), GraphQLRouter.allowedMethods());
 
 // Return transpiled script as HTML string.
 app.use((ctx) => {
