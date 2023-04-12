@@ -42,6 +42,6 @@ Run the script below to start the demo:
 deno task start
 ```
 
-## Connecting with Obsidian Developer Tool 8.0
+## Connecting with Obsidian-Developer-Tool
 
 Check out the Obsidian Developer Tool [here](https://github.com/open-source-labs/obsidian-developer-tool)!
