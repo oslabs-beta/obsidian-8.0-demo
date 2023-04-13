@@ -8,7 +8,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: base
-    command: deno run --allow-env --allow-read --allow-net --allow-run --allow-write --no-check server/server.ts
+    command: deno run --allow-env --allow-read --allow-net --allow-run --allow-write --no-check --lock=deno.lock --lock-write server/server.ts
     ports:
       - "3000:3000"
     volumes:
