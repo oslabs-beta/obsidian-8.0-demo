@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  demo:
+    container_name: obs-demo
+    image: obsidian8/demo
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    command: deno run --allow-env --allow-read --allow-net --allow-run --allow-write --no-check server/server.ts
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    environment:
+      - REDIS_HOST=obs-redis
+      - PG_USER=obsidian
+      - PG_DATABASE=obsidian
+      - PG_PORT=5432
+      - PG_HOSTNAME=obs-postgres
+      - PG_PASSWORD=Sc1CIVO-EAvQ2eVS3mFTar_7e0lgcKZC
+    depends_on:
+      - postgres-server
+  postgres-server:
+    image: obsidian8/postgres
+    container_name: obs-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=Sc1CIVO-EAvQ2eVS3mFTar_7e0lgcKZC
+      - POSTGRES_USER=obsidian
+      - POSTGRES_DATABASE=obsidian
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOSTNAME=obs-postgres
+    volumes:
+      - postgres-volume:/usr/data/postgres
+volumes:
+  postgres-volume:
+  obsidian-volume:
