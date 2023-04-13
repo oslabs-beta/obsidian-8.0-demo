@@ -45,3 +45,7 @@ deno task start
 ## Connecting with Obsidian-Developer-Tool
 
 Check out the Obsidian Developer Tool [here](https://github.com/open-source-labs/obsidian-developer-tool)!
+
+## Using the Containerized Demo
+
+In a rush? We have a containerized demo available as well that showcases client-side caching with W-Tiny-LFU. Just use the command `docker-compose up` in the root directory after you fork and clone this repo.
